@@ -93,11 +93,7 @@ def generate_test_dataset(size=size, stride=size,
     这个函数用来生成测试数据集
     :return:
     '''
-
-
-
     count = 1
-
 
     images_path = ['dataset/origin/10.png']
     labels_path = ['dataset/origin/10_class.png']

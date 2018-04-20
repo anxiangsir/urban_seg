@@ -49,7 +49,7 @@ with tf.Session(config= config) as sess:
 
     # 用来计算总数
     total_acc_tr,total_acc_test,total_loss_tr,total_loss_test = 0,0,0,0
-    best_loss =100
+    best_acc = 0.5
 
 
     for step in range(1,100000):
@@ -57,14 +57,14 @@ with tf.Session(config= config) as sess:
         x_tr, y_tr = train_DataSet.next_batch(args.batch_size)
         x_test, y_test = test_DataSet.next_batch(args.batch_size)
 
-        loss_tr, acc_tr, lr, _ = sess.run([model.loss, model.acc_score, learning_rate, train_op],feed_dict={model.x:x_tr,model.y:y_tr})
-        loss_test, acc_test = sess.run([model.loss, model.acc_score],feed_dict={model.x:x_test,model.y:y_test})
+        loss_tr, predict_tr, lr, _ = sess.run([model.loss, model.predicts, learning_rate, train_op],feed_dict={model.x:x_tr,model.y:y_tr})
+        loss_test, predict_test = sess.run([model.loss, model.predicts],feed_dict={model.x:x_test,model.y:y_test})
 
         # 计数
         total_loss_tr += loss_tr
         total_loss_test += loss_test
-        total_acc_tr += acc_tr[1]
-        total_acc_test += acc_test[1]
+        total_acc_tr += model.accuracy_score(y_true=y_tr,y_pred=predict_tr)
+        total_acc_test += model.accuracy_score(y_true=y_test,y_pred=predict_test)
 
 
 
@@ -78,10 +78,10 @@ with tf.Session(config= config) as sess:
                 "Iter {:},学习率= {:g}, 训练损失= {:.4f}, 训练精度= {:.4f}, 测试损失= {:.4f}, 测试精度= {:.4f} ".
                     format(step,lr, total_loss_tr/display,total_acc_tr/display,total_loss_test/display,total_acc_test/display))
             # 保存效果最好的模型
-            if total_loss_test/display < best_loss:
-                best_loss = total_loss_test/display
+            if total_acc_test/display > best_acc:
+                best_acc = total_acc_test/display
                 saver.save(sess, save_path='model/model.ckpt')
-                # logging.info("保存成功！")
+                logging.info("保存成功！")
 
 
 
