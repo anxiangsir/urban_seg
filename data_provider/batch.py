@@ -15,8 +15,8 @@ class Init_DataSet:
         # 验证集
         self.val_DataSet = DataSet(image_path_val,label_path_val)
 
-    def get_DataSet(self):
-        return self.train_DataSet, self.val_DataSet
+    # def get_DataSet(self):
+    #     return self.train_DataSet, self.val_DataSet
 
 
 

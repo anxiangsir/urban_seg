@@ -206,3 +206,7 @@ def data_augment(xb, yb):
         xb = add_noise(xb)
 
     return xb, yb
+
+if __name__ == '__main__':
+    generate_test_dataset()
+    generate_train_dataset()

@@ -31,7 +31,7 @@ def atrous_spatial_pyramid_pooling(net, scope, depth=256, reuse=None):
 
 def deeplab_v3(inputs, args, is_training, reuse):
 
-
+    inputs = inputs / 255.0
 
     with slim.arg_scope(resnet_utils.resnet_arg_scope(args.l2_regularizer, is_training,
                                                       args.batch_norm_decay,
