@@ -77,7 +77,7 @@ with tf.Session(config= config) as sess:
             logging.info(
                 "Iter {:},学习率= {:g}, 训练损失= {:.4f}, 训练精度= {:.4f}, 测试损失= {:.4f}, 测试精度= {:.4f} ".
                     format(step,lr, total_loss_tr/display,total_acc_tr/display,total_loss_test/display,total_acc_test/display))
-
+            # 保存效果最好的模型
             if total_loss_test/display < best_loss:
                 best_loss = total_loss_test/display
                 saver.save(sess, save_path='model/model.ckpt')
