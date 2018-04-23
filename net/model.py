@@ -1,17 +1,19 @@
 from net.deeplab_v3 import deeplab_v3
-from tensorflow.contrib import slim
-#
+from global_config import Config
 import numpy as np
 import tensorflow as tf
-import sklearn
-class Model:
-    def __init__(self, args):
-        self.args = args
-        self.x = tf.placeholder(tf.float32, [None, args.size, args.size, 3])
-        self.y = tf.placeholder(tf.int32, [None, args.size, args.size])
 
+
+
+class Model:
+    def __init__(self, config):
+
+        self.size = config.size
+        self.batch_size = config.batch_size
+        self.x = tf.placeholder(tf.float32, [None, self.size, self.size, 3])
+        self.y = tf.placeholder(tf.int32, [None, self.size, self.size])
         # 预测结果 [batch_size, size, size, n_class]
-        self.logits = deeplab_v3(inputs=self.x,args=args,reuse=False,is_training=True)
+        self.logits = deeplab_v3(inputs=self.x,args=config,reuse=False,is_training=True)
         # 交叉熵损失
         self.loss = self.get_loss()
         # 预测结果 [batch_size, size, size]
@@ -26,18 +28,15 @@ class Model:
 
 
     def accuracy_score(self,y_true,y_pred):
-        y_true = np.reshape(y_true,(self.args.batch_size*self.args.size*self.args.size))
-        y_pred = np.reshape(y_pred,(self.args.batch_size*self.args.size*self.args.size))
+        # 计算acc
+        y_true = np.reshape(y_true,(self.batch_size*self.size*self.size))
+        y_pred = np.reshape(y_pred,(self.batch_size*self.size*self.size))
         right = np.sum(y_true == y_pred)
-        all = self.args.batch_size*self.args.size*self.args.size
+        all = self.batch_size*self.size*self.size
         return right/all
 
 
-    def restore(self, sess, path):
-        variables_to_restore = slim.get_variables_to_restore(exclude=[self.args.resnet_model + "/logits", "optimizer_vars",
-                                                                      "DeepLab_v3/ASPP_layer", "DeepLab_v3/logits"])
-        restorer = tf.train.Saver(variables_to_restore)
-        restorer.restore(sess, path)
+
 
 
     @staticmethod

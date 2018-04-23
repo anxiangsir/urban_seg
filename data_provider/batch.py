@@ -6,17 +6,34 @@ import tensorflow as tf
 
 class Init_DataSet:
     def __init__(self,
-                 image_path_tr=list(map(lambda x:'dataset/train/images/'+x,os.listdir('dataset/train/images/'))),
-                 label_path_tr=list(map(lambda x:'dataset/train/labels/'+x,os.listdir('dataset/train/images/'))),
-                 image_path_val=list(map(lambda x:'dataset/test/images/'+x,os.listdir('dataset/test/images/'))),
-                 label_path_val=list(map(lambda x:'dataset/test/labels/'+x,os.listdir('dataset/test/images/')))):
+                 image_path=list(map(lambda x:'dataset/train/images/'+x,os.listdir('dataset/train/images/'))),
+                 label_path=list(map(lambda x:'dataset/train/labels/'+x,os.listdir('dataset/train/images/'))),):
+
+        image_path = np.array(image_path)
+        label_path = np.array(label_path)
+
+        dataset_num = image_path.shape[0]
+        random_index = np.random.permutation(dataset_num)
+
+        # 打乱
+        image_path = image_path[random_index]
+        label_path = label_path[random_index]
+        # 划分训练集
+        image_path_tr = image_path[:int(dataset_num*0.8)]
+        label_path_tr = label_path[:int(dataset_num*0.8)]
+        # 划分验证集
+        image_path_val = image_path[int(dataset_num*0.8):]
+        label_path_val = label_path[int(dataset_num*0.8):]
+
+
+
         # 训练集
         self.train_DataSet = DataSet(image_path_tr,label_path_tr)
         # 验证集
         self.val_DataSet = DataSet(image_path_val,label_path_val)
 
-    # def get_DataSet(self):
-    #     return self.train_DataSet, self.val_DataSet
+    def get_DataSet(self):
+        return self.train_DataSet, self.val_DataSet
 
 
 
@@ -50,6 +67,7 @@ class DataSet():
             self.batch_count = 0
             random_index = np.random.permutation(self.image_path.shape[0])
             self.image_path = self.image_path[random_index]
+            self.label_path = self.label_path[random_index]
             self.epoch_count += 1
             start = self.batch_count * batch_size
             end = start + batch_size
@@ -66,7 +84,6 @@ class DataSet():
         :param y_path:
         :return:
         '''
-
         x = []
         y = []
         for i in range(x_path.shape[0]):
@@ -77,9 +94,3 @@ class DataSet():
 
     def transform(self,img):
         return img
-
-
-
-
-
-
