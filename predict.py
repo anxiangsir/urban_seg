@@ -99,7 +99,7 @@ if __name__ == '__main__':
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
         restorer = tf.train.Saver()
-        restorer.restore(sess,'models/3/model.ckpt')
+        restorer.restore(sess,'single_model/model.ckpt')
         args = {
             'image_path':'dataset/test/1_8bits.png',
             'sess':sess,

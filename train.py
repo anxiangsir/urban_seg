@@ -34,7 +34,6 @@ with tf.control_dependencies(update_ops):
     train_op = optimizer.minimize(loss=model.loss)
 
 
-slim.batch_norm()
 
 with tf.Session(config= gpu_config) as sess:
     sess.run(tf.local_variables_initializer())
