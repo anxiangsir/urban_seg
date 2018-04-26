@@ -11,31 +11,30 @@ class Model:
         self.size = config.size
         self.batch_size = config.batch_size
         self.x = tf.placeholder(tf.float32, [None, self.size, self.size, 3])
-        self.y = tf.placeholder(tf.int32, [None, self.size, self.size])
+        self.y = tf.placeholder(tf.int64, [None, self.size, self.size])
         # 预测结果 [batch_size, size, size, n_class]
         self.logits = deeplab_v3(inputs=self.x,args=config,reuse=False,is_training=config.is_training)
         # 交叉熵损失
         self.loss = self.get_loss()
         # 预测结果 [batch_size, size, size]
         self.predicts = tf.argmax(self.logits,axis=3)
-
         self.global_step = tf.train.get_or_create_global_step()
+        self.pixel_acc = self.get_pixel_accuracy()
+        self.summary_op = tf.summary.merge_all()
 
     def get_loss(self):
         # 交叉熵损失函数
-        return tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=self.y,logits=self.logits))
+        loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=self.y,logits=self.logits))
+        tf.summary.scalar('loss',loss)
+        return loss
 
 
-
-    def accuracy_score(self,y_true,y_pred):
-        # 计算acc
-        y_true = np.reshape(y_true,(self.batch_size*self.size*self.size))
-        y_pred = np.reshape(y_pred,(self.batch_size*self.size*self.size))
-        right = np.sum(y_true == y_pred)
-        all = self.batch_size*self.size*self.size
-        return right/all
-
-
+    def get_pixel_accuracy(self):
+        y_true = tf.reshape(self.y,[self.batch_size*self.size*self.size])
+        y_pred = tf.reshape(self.predicts,[self.batch_size*self.size*self.size])
+        acc = tf.reduce_mean(tf.cast(tf.equal(y_true,y_pred),'float'))
+        tf.summary.scalar('pixel_accuracy',acc)
+        return acc
 
 
 

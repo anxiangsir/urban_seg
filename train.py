@@ -34,11 +34,13 @@ with tf.control_dependencies(update_ops):
     train_op = optimizer.minimize(loss=model.loss)
 
 
-
 with tf.Session(config= gpu_config) as sess:
+
     sess.run(tf.local_variables_initializer())
     sess.run(tf.global_variables_initializer())
-
+    #
+    train_writer = tf.summary.FileWriter('log/train')
+    val_writer = tf.summary.FileWriter('log/test')
     # 载入残差网络预训练好的权重
     restorer.restore(sess,'net/resnet_model/resnet_v2_50.ckpt')
 
@@ -52,17 +54,16 @@ with tf.Session(config= gpu_config) as sess:
         x_tr, y_tr = train_dataset.next_batch(config.batch_size)
         x_val, y_val = val_dataset.next_batch(config.batch_size)
         #
-        loss_tr, predict_tr, _ = sess.run([model.loss, model.predicts, train_op],feed_dict={model.x:x_tr,model.y:y_tr})
-        loss_val, predict_val = sess.run([model.loss, model.predicts],feed_dict={model.x:x_val,model.y:y_val})
+        loss_tr, acc_tr, _, summary_train = sess.run([model.loss, model.pixel_acc, train_op, model.summary_op],feed_dict={model.x:x_tr,model.y:y_tr})
+        loss_val, acc_val, summary_val = sess.run([model.loss, model.pixel_acc, model.summary_op],feed_dict={model.x:x_val,model.y:y_val})
         # 计数
         total_loss_tr += loss_tr
         total_loss_val += loss_val
-        #
-        total_acc_tr += model.accuracy_score(y_true=y_tr,y_pred=predict_tr)
-        total_acc_val += model.accuracy_score(y_true=y_val,y_pred=predict_val)
+        total_acc_tr += acc_tr
+        total_acc_val += acc_val
 
-
-
+        train_writer.add_summary(summary_train,step)
+        val_writer.add_summary(summary_val,step)
 
         # step for display
         display = 50
