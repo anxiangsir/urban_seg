@@ -8,12 +8,12 @@ from tqdm import tqdm
 
 
 size = Config.size
+stride = size//2
 
 
-
-
+# 随机窗口采样
 def generate_train_dataset(image_num = 80000,
-                           train_image_path='dataset/train/images/',
+                           train_image_path='dataset/train/sample_image/',
                            train_label_path='dataset/train/labels/'):
 
 
@@ -54,9 +54,43 @@ def generate_train_dataset(image_num = 80000,
 
 
 
+# def generate_train_dataset(train_image_path='dataset/train/sample_image/',
+#                            train_label_path='dataset/train/labels/',
+#                            augment=True):
+#     # 用来记录所有的子图的数目
+#
+#     images_path = ['dataset/origin/1.png',
+#                    'dataset/origin/2.png', 'dataset/origin/3.png',
+#                    'dataset/origin/4.png', 'dataset/origin/5.png']
+#     labels_path = ['dataset/origin/1_class.png',
+#                    'dataset/origin/2_class.png', 'dataset/origin/3_class.png',
+#                    'dataset/origin/4_class.png', 'dataset/origin/5_class.png']
+#     count = 0
+#     for i in tqdm(range(len(images_path))):
+#         image = cv2.imread(images_path[i])
+#         label = cv2.imread(labels_path[i], cv2.CAP_MODE_GRAY)
+#
+#         # 根据划窗步长切图
+#         for h in range((image.shape[0]- size)//stride):
+#             for w in range((image.shape[1]-size)//stride):
+#                 image_ogi = image[h*stride:h*stride+size,w*stride:w*stride+size,:]
+#                 label_ogi = label[h*stride:h*stride+size,w*stride:w*stride+size]
+#                 # 保存原图
+#                 cv2.imwrite((train_image_path+'%05d.png' % count), image_ogi)
+#                 cv2.imwrite((train_label_path+'%05d.png' % count), label_ogi)
+#                 count += 1
+#                 if augment:
+#                     image_d,label_d = data_augment(image_ogi,label_ogi)
+#                     cv2.imwrite((train_image_path+'%05d.png' % count), image_d)
+#                     cv2.imwrite((train_label_path+'%05d.png' % count), label_d)
+#                     count +=1
+
+
+
+
 
 def generate_test_dataset(size=size, stride=size,
-                           train_image_path='dataset/test/images/',
+                           train_image_path='dataset/test/sample_image/',
                            train_label_path='dataset/test/labels/'):
     '''
     这个函数用来生成测试数据集
@@ -82,39 +116,7 @@ def generate_test_dataset(size=size, stride=size,
                 count += 1
 
 
-# def g(size=size, stride=size,
-#                            train_image_path='dataset/train/images/',
-#                            train_label_path='dataset/train/labels/'):
-#     '''
-#     这个函数用来生成测试数据集
-#     :return:
-#     '''
-#     count = 1
-#
-#     images_path = ['dataset/origin/1.png',
-#                    'dataset/origin/2.png', 'dataset/origin/3.png',
-#                    'dataset/origin/4.png', 'dataset/origin/5.png',
-#                    'dataset/origin/6.png', 'dataset/origin/7.png',
-#                    'dataset/origin/8.png', 'dataset/origin/9.png']
-#     labels_path = ['dataset/origin/1_class.png',
-#                    'dataset/origin/2_class.png', 'dataset/origin/3_class.png',
-#                    'dataset/origin/4_class.png', 'dataset/origin/5_class.png',
-#                    'dataset/origin/6_class.png', 'dataset/origin/7_class.png',
-#                    'dataset/origin/8_class.png', 'dataset/origin/9_class.png']
-#
-#     for i in range(len(images_path)):
-#         image = cv2.imread(images_path[i])
-#         label = cv2.imread(labels_path[i], cv2.CAP_MODE_GRAY)
-#
-#         # 根据划窗步长切图
-#         for h in tqdm(range((image.shape[0]-size)//stride)):
-#             for w in range((image.shape[1]-size)//stride):
-#                 image_ogi = image[h*stride:h*stride+size,w*stride:w*stride+size,:]
-#                 label_ogi = label[h*stride:h*stride+size,w*stride:w*stride+size]
-#                 # 保存原图
-#                 cv2.imwrite((train_image_path+'%05d.png' % count), image_ogi)
-#                 cv2.imwrite((train_label_path+'%05d.png' % count), label_ogi)
-#                 count += 1
+
 
 
 
@@ -186,13 +188,13 @@ def data_augment(xb, yb):
     if np.random.random() < 0.25:
         xb = blur(xb)
 
-    # # 双边过滤
-    # if np.random.random() < 0.25:
-    #     xb =cv2.bilateralFilter(xb,9,75,75)
-    #
-    # #  高斯滤波
-    # if np.random.random() < 0.25:
-    #     xb = cv2.GaussianBlur(xb,(5,5),1.5)
+    # 双边过滤
+    if np.random.random() < 0.25:
+        xb =cv2.bilateralFilter(xb,9,75,75)
+
+    #  高斯滤波
+    if np.random.random() < 0.25:
+        xb = cv2.GaussianBlur(xb,(5,5),1.5)
 
     # #   腐蚀
     # if np.random.random() < 0.25:

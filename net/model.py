@@ -13,7 +13,7 @@ class Model:
         self.x = tf.placeholder(tf.float32, [None, self.size, self.size, 3])
         self.y = tf.placeholder(tf.int32, [None, self.size, self.size])
         # 预测结果 [batch_size, size, size, n_class]
-        self.logits = deeplab_v3(inputs=self.x,args=config,reuse=False,is_training=True)
+        self.logits = deeplab_v3(inputs=self.x,args=config,reuse=False,is_training=config.is_training)
         # 交叉熵损失
         self.loss = self.get_loss()
         # 预测结果 [batch_size, size, size]

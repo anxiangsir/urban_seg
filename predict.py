@@ -16,6 +16,7 @@ class test_config:
     output_stride = 16
     resnet_model = "resnet_v2_50"
     batch_size = 1
+    is_training = False
 
 
 class Predict:
@@ -98,12 +99,11 @@ if __name__ == '__main__':
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
         restorer = tf.train.Saver()
-        restorer.restore(sess,'model/model.ckpt')
+        restorer.restore(sess,'models/1/model.ckpt')
         args = {
-            'image_path':'dataset/origin/1.png',
+            'image_path':'dataset/test/1_8bits.png',
             'sess':sess,
             'predict_path':'predict.png',
             'color_path':'predict_color.png'
         }
-
         predict.fit(**args)

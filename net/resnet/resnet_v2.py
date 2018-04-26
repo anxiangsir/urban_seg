@@ -134,7 +134,7 @@ def resnet_v2(inputs,
     [(height - 1) / output_stride + 1, (width - 1) / output_stride + 1]
     and corners exactly aligned with the input image corners, which greatly
     facilitates alignment of the features to the image. Using as input [225, 225]
-    images results in [8, 8] feature maps at the output of the last ResNet block.
+    sample_image results in [8, 8] feature maps at the output of the last ResNet block.
 
     For dense prediction tasks, the ResNet needs to run in fully-convolutional
     (FCN) mode and global_pool needs to be set to False. The ResNets in [1, 2] all
@@ -159,7 +159,7 @@ def resnet_v2(inputs,
         results of an activation-less convolution.
       spatial_squeeze: if True, logits is of shape [B, C], if false logits is
           of shape [B, 1, 1, C], where B is batch_size and C is number of classes.
-          To use this parameter, the input images must be smaller than 300x300
+          To use this parameter, the input sample_image must be smaller than 300x300
           pixels, in which case the output logit layer does not contain spatial
           information and can be removed.
       reuse: whether or not the network and its variables should be reused. To be

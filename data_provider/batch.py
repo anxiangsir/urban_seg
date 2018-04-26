@@ -6,8 +6,8 @@ import tensorflow as tf
 
 class Init_DataSet:
     def __init__(self,
-                 image_path=list(map(lambda x:'dataset/train/images/'+x,os.listdir('dataset/train/images/'))),
-                 label_path=list(map(lambda x:'dataset/train/labels/'+x,os.listdir('dataset/train/images/'))),):
+                 image_path=list(map(lambda x:'dataset/train/sample_image/'+x,os.listdir('dataset/train/sample_image/'))),
+                 label_path=list(map(lambda x:'dataset/train/labels/'+x,os.listdir('dataset/train/sample_image/'))),):
 
         image_path = np.array(image_path)
         label_path = np.array(label_path)

@@ -71,10 +71,10 @@ with tf.Session(config= gpu_config) as sess:
 
             # 保存效果最好的模型
             if  total_loss_val/display < best_loss:
-                shutil.rmtree('model/')
-                os.mkdir('model')
+                shutil.rmtree('single_model/')
+                os.mkdir('single_model')
                 best_loss = total_loss_val/display
-                saver.save(sess, save_path='model/model.ckpt')
+                saver.save(sess, save_path='single_model/model.ckpt')
                 logging.info("保存成功！")
 
 
