@@ -1,4 +1,4 @@
-from data_provider.batch import Init_DataSet
+from utils.batch import Init_DataSet
 from tensorflow.contrib import slim
 from net.model import Model
 import tensorflow as tf
@@ -26,13 +26,16 @@ variables_to_restore = slim.get_variables_to_restore(
     exclude=[config.resnet_model + "/logits","DeepLab_v3/ASPP_layer", "DeepLab_v3/logits"])
 restorer = tf.train.Saver(variables_to_restore)
 #
+optimizer = tf.train.AdamOptimizer(learning_rate=config.starting_learning_rate)
 # 优化器
-train_op = tf.train.AdamOptimizer(learning_rate=config.starting_learning_rate).minimize(loss=model.loss)
+update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
+with tf.control_dependencies(update_ops):
+    # https://blog.csdn.net/sinat_30372583/article/details/79943743
+    train_op = optimizer.minimize(loss=model.loss)
 
 
-####################
-#                  #
-####################
+slim.batch_norm()
+
 with tf.Session(config= gpu_config) as sess:
     sess.run(tf.local_variables_initializer())
     sess.run(tf.global_variables_initializer())

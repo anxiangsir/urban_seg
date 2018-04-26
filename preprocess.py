@@ -11,9 +11,10 @@ size = Config.size
 stride = size//2
 
 
+
 # 随机窗口采样
 def generate_train_dataset(image_num = 80000,
-                           train_image_path='dataset/train/sample_image/',
+                           train_image_path='dataset/train/images/',
                            train_label_path='dataset/train/labels/'):
 
 
@@ -54,7 +55,7 @@ def generate_train_dataset(image_num = 80000,
 
 
 
-# def generate_train_dataset(train_image_path='dataset/train/sample_image/',
+# def generate_train_dataset(train_image_path='dataset/train/images/',
 #                            train_label_path='dataset/train/labels/',
 #                            augment=True):
 #     # 用来记录所有的子图的数目
@@ -90,7 +91,7 @@ def generate_train_dataset(image_num = 80000,
 
 
 def generate_test_dataset(size=size, stride=size,
-                           train_image_path='dataset/test/sample_image/',
+                           train_image_path='dataset/test/images/',
                            train_label_path='dataset/test/labels/'):
     '''
     这个函数用来生成测试数据集
