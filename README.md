@@ -13,6 +13,18 @@ CCF卫星影像的AI分类与识别提供的数据集
 2. 使用模型为deeplabv_3，使用预训练好的resnet_v2_50 fine-tuning
 3. 模型融合
 
+### 要求与硬件
+python3.5.2  
+tensorflow  
+
+
+
+### 数据处理
+使用随机采样训练不同的模型  
+运行 preprocess.py
+
+
+
 
 ### 测试图片：
 <center class="half">
