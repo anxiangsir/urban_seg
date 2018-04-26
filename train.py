@@ -30,7 +30,9 @@ restorer = tf.train.Saver(variables_to_restore)
 train_op = tf.train.AdamOptimizer(learning_rate=config.starting_learning_rate).minimize(loss=model.loss)
 
 
-#
+####################
+#                  #
+####################
 with tf.Session(config= gpu_config) as sess:
     sess.run(tf.local_variables_initializer())
     sess.run(tf.global_variables_initializer())
