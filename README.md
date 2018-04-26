@@ -16,10 +16,10 @@ CCF卫星影像的AI分类与识别提供的数据集
 
 ### 测试图片：
 <center class="half">
-    <img src="/sample_image/test1.jpg " width="70%" height="60%">
+    <img src="/sample_image/test1.jpg " width="60%" height="60%">
 </center>
 
 ### 预测图片：
 <center>
-    <img src="/sample_image/predict_color.png  " width="70%" height="60%">
+    <img src="/sample_image/predict_color.png  " width="60%" height="60%">
 </center>
