@@ -1,5 +1,3 @@
-
-
 class Config:
     is_training = True
     batch_norm_epsilon = 1e-5
@@ -12,5 +10,3 @@ class Config:
     output_stride = 16
     resnet_model = "resnet_v2_50"
     batch_size = 16
-
-

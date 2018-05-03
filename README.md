@@ -32,3 +32,8 @@ CCF卫星影像的AI分类与识别提供的数据集
 <center>
     <img src="/sample_image/predict_color.png  " width="60%" height="60%">
 </center>
+
+### 损失曲线：
+<center>
+    <img src="/sample_image/loss&acc.png  " width="60%" height="60%">
+</center>

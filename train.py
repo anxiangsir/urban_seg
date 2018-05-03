@@ -83,9 +83,5 @@ with tf.Session(config= gpu_config) as sess:
                 saver.save(sess, save_path='single_model/model.ckpt')
                 logging.info("保存成功！")
 
-
             total_acc_tr, total_acc_val, total_loss_tr, total_loss_val = 0, 0, 0, 0
             # 归零
-
-
-
