@@ -42,8 +42,10 @@ with tf.Session(config= gpu_config) as sess:
     #
     train_writer = tf.summary.FileWriter('log/train')
     val_writer = tf.summary.FileWriter('log/test')
-    # 载入残差网络预训练好的权重
-    # 如果要迁移学习预训练好的网络，取消注释并下载模型
+
+    # 如果要迁移学习预训练好的网络，取消注释并下载模型，模型下载链接为：
+    # http://download.tensorflow.org/models/resnet_v2_50_2017_04_14.tar.gz
+    
     # restorer.restore(sess,'net/resnet_model/resnet_v2_50.ckpt')
 
     # 用来计算总数
