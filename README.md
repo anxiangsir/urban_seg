@@ -1,4 +1,4 @@
- # deeplab_v3
+# deeplab_v3
 
 
 ### 数据集：
@@ -8,6 +8,7 @@ CCF卫星影像的AI分类与识别提供的数据集初赛复赛训练集，一
 
 * 百度云盘：[点击这里](https://pan.baidu.com/s/1LWBMklOr39yI7fYRQ185Og)  
 * 密码：3ih2
+* 预训练模型：[点击这里下载](http://download.tensorflow.org/models/resnet_v1_152_2016_08_28.tar.gz)
 
 
 ### 主要采用方法：
