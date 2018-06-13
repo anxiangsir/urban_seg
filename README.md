@@ -29,14 +29,10 @@ CCF卫星影像的AI分类与识别提供的数据集初赛复赛训练集，一
 
 
 ### 测试图片：
-<center class="half">
-    <img src="/sample_image/test1.jpg " width="60%" height="60%">
-</center>
+<div align=center><img width="600" height="600" src="/sample_image/test1.jpg"/></div>  
 
 ### 预测图片：
-<center>
-    <img src="/sample_image/predict_color.png  " width="60%" height="60%">
-</center>
+<div align=center><img width="600" height="600" src="/sample_image/predict_color.png"/></div>  
 
 ### 损失曲线：
 <center>
