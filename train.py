@@ -83,6 +83,7 @@ with tf.Session(config= gpu_config) as sess:
                 shutil.rmtree('single_model/')
                 os.mkdir('single_model')
                 best_loss = total_loss_val/display
+                # 保存模型的地址
                 saver.save(sess, save_path='single_model/model.ckpt')
                 logging.info("保存成功！")
 
