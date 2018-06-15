@@ -42,3 +42,4 @@ CCF卫星影像的AI分类与识别提供的数据集初赛复赛训练集，一
 <center>
     <img src="/sample_image/loss&acc.png  " width="90%" height="90%">
 </center>
+有问题可加QQ：1363090802一起交流
