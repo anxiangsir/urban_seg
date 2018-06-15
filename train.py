@@ -78,7 +78,7 @@ with tf.Session(config= gpu_config) as sess:
                 "Iter {:}, loss_tr= {:.4f}, acc_tr= {:.4f}, loss_val= {:.4f}, acc_val= {:.4f} ".
                     format(step, total_loss_tr/display,total_acc_tr/display,total_loss_val/display,total_acc_val/display))
 
-            # 保存效果最好的模型
+            # 保存效果最好的模型，每次都保存在验证集上表现最好的模型
             if  total_loss_val/display < best_loss:
                 shutil.rmtree('single_model/')
                 os.mkdir('single_model')
