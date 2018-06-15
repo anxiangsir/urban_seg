@@ -16,6 +16,13 @@ stride = size//2
 def generate_train_dataset(image_num = 80000,
                            train_image_path='dataset/train/images/',
                            train_label_path='dataset/train/labels/'):
+    '''
+    该函数用来生成训练集，切图方法为随机切图采样
+    :param image_num: 生成样本的个数
+    :param train_image_path: 切图保存样本的地址
+    :param train_label_path: 切图保存标签的地址
+    :return:
+    '''
 
 
 
@@ -88,40 +95,7 @@ def generate_train_dataset(image_num = 80000,
 
 
 
-
-
-def generate_test_dataset(size=size, stride=size,
-                           train_image_path='dataset/test/images/',
-                           train_label_path='dataset/test/labels/'):
-    '''
-    这个函数用来生成测试数据集
-    :return:
-    '''
-    count = 1
-
-    images_path = ['dataset/origin/10.png']
-    labels_path = ['dataset/origin/10_class.png']
-
-    for i in range(len(images_path)):
-        image = cv2.imread(images_path[i])
-        label = cv2.imread(labels_path[i], cv2.CAP_MODE_GRAY)
-
-        # 根据划窗步长切图
-        for h in tqdm(range((image.shape[0]-size)//stride)):
-            for w in range((image.shape[1]-size)//stride):
-                image_ogi = image[h*stride:h*stride+size,w*stride:w*stride+size,:]
-                label_ogi = label[h*stride:h*stride+size,w*stride:w*stride+size]
-                # 保存原图
-                cv2.imwrite((train_image_path+'%05d.png' % count), image_ogi)
-                cv2.imwrite((train_label_path+'%05d.png' % count), label_ogi)
-                count += 1
-
-
-
-
-
-
-
+# 以下函数都是一些数据增强的函数
 def gamma_transform(img, gamma):
     gamma_table = [np.power(x / 255.0, gamma) * 255.0 for x in range(size)]
 

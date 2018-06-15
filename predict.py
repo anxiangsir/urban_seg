@@ -28,6 +28,14 @@ class Predict:
 
 
     def fit(self, image_path, predict_path, color_path, sess):
+        '''
+        该函数用来预测需要测试的图片
+        :param image_path:
+        :param predict_path:
+        :param color_path:
+        :param sess:
+        :return:
+        '''
 
         # 获得原始的图像
         self.ori_image = cv2.imread(image_path)
@@ -83,6 +91,12 @@ class Predict:
 
 
     def combin_image(self,predict_path,color_path):
+        '''
+        将模型预测后的结果生成的小图片拼成大的遥感图片并上色
+        :param predict_path: 拼成大图片的地址
+        :param color_path: 拼成大图片并上色的地址
+        :return:
+        '''
         tmp = np.ones([self.h_step*self.size,self.w_step*self.size])
         for h in range(self.h_step):
             for w in range(self.w_step):
@@ -101,9 +115,9 @@ if __name__ == '__main__':
         restorer = tf.train.Saver()
         restorer.restore(sess,'single_model/model.ckpt')
         args = {
-            'image_path':'dataset/test/1_8bits.png',
-            'sess':sess,
-            'predict_path':'predict.png',
-            'color_path':'predict_color.png'
+            'image_path':'dataset/test/1_8bits.png',   # 这个路径可以是你要预测图片的路径
+            'sess':sess,                               # 这个不用改
+            'predict_path':'predict.png',              # 这个是你保存预测结果的地址
+            'color_path':'predict_color.png'           # 这个是你预测结果并上色的保存地址
         }
         predict.fit(**args)

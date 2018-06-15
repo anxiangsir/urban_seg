@@ -9,6 +9,7 @@ class Init_DataSet:
                  image_path=list(map(lambda x:'dataset/train/images/'+x,os.listdir('dataset/train/images/'))),
                  label_path=list(map(lambda x:'dataset/train/labels/'+x,os.listdir('dataset/train/images/'))),):
 
+        # 通过读取文件夹，得到所有样本地址的列表
         image_path = np.array(image_path)
         label_path = np.array(label_path)
 
@@ -53,11 +54,20 @@ class DataSet():
         self.epoch_count = 0
 
     def num_examples(self):
+        '''
+        得到样本的数量
+        :return:
+        '''
 
         return self.image_path.shape[0]
 
 
     def next_batch(self, batch_size):
+        '''
+        next_batch函数
+        :param batch_size:
+        :return:
+        '''
 
         start = self.batch_count * batch_size
         end = start + batch_size
