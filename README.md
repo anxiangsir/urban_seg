@@ -18,10 +18,17 @@ dataset
 ### 采用方法：
 * 使用模型为Deeplab_v3，使用预训练好的resnet_v2_50 fine-tuning
 * 将原始的遥感图像裁成大小为(256x256)的图片块，裁剪的方法为随机采样，并进行数据增强
+### 依赖
+* tensorflow >= 1.4
+* opencv-python >= 3.4.3
+* GPU Nvidia Tesla V100 (16G)
+单卡跑一天就可以收敛~
 ### How To Train?
 1. 将百度云中的数据集文件夹dataset下载并存放到项目主目录下
 2. python proprecess.py 生成训练集 时间稍长，需要等待
 3. python main.py 开始训练
+
+
 ### TODO:  
 Pull requests are welcome.  
 - [x] Resnet_v2_50 as Network Backbone using tensorflow API.
