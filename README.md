@@ -30,14 +30,13 @@ Pull requests are welcome.
 - [ ] Multi-GPU support
 - [ ] TFRecords
 ### 测试图片：
-
-<table border=2>
+<table border=0>
 <tr>
     <td>
-        <img src="/sample_image/test1.jpg" border=0 width=512>
+        <img src="/sample_image/test1.jpg" border=0 margin=1 width=512>
     </td>
     <td>
-        <img src="/sample_image/predict_color.png" border=0 width=512>
+        <img src="/sample_image/predict_color.png" border=0 margin=1 width=512>
     </td>
 </tr>
 </table>
