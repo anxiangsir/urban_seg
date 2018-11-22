@@ -27,9 +27,14 @@ Pull requests are welcome.
 - [ ] Multi-GPU support
 - [ ] TFRecords
 ### 测试图片：
-<div align=center><img src="/sample_image/test1.jpg" width="90%"/></div>  
-
-### 预测图片：
+ 
+<table>
+   <tr>
+       <td><img src="/sample_image/test1.jpg"></td>
+       <td><img src="/sample_image/predict_color.png"></td>
+   </tr>
+</table>
+<div align=center><img src="/sample_image/test1.jpg" width="90%"/></div> 
 <div align=center><img src="/sample_image/predict_color.png" width="90%"/></div>  
 
 ### 损失曲线：
