@@ -31,12 +31,9 @@ Pull requests are welcome.
 - [ ] TFRecords
 ### 测试图片：
  
-<table>
-   <tr>
-       <td><img src="/sample_image/test1.jpg" width="45%"></td>
-       <td><img src="/sample_image/predict_color.png" width="45%"></td>
-   </tr>
-</table>
+<BODY>
+<img src="/sample_image/test1.jpg"><img src="/sample_image/predict_color.png">
+</BODY>
 <div align=center><img src="/sample_image/test1.jpg" width="90%"/></div> 
 <div align=center><img src="/sample_image/predict_color.png" width="90%"/></div>  
 
