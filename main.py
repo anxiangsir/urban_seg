@@ -11,12 +11,12 @@ import os
 
 class args:
     batch_size = 32
-    lr = 0.002
+    lr = 0.0002
     display = 500
     weight_decay = 0.00001
     model_name = 'deeplab_v3'
     batch_norm_decay = 0.95
-    momentum = 0.9
+
 
 
 

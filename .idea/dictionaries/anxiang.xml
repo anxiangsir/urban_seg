@@ -9,7 +9,10 @@
       <w>finetune</w>
       <w>logits</w>
       <w>preact</w>
+      <w>pretrained</w>
+      <w>proprecess</w>
       <w>resnet</w>
+      <w>tensorflow</w>
     </words>
   </dictionary>
 </component>
