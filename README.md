@@ -33,6 +33,10 @@ Pull requests are welcome.
 
 <img src="/sample_image/test1.jpg" width="40%" float:left border:20/><img src="/sample_image/predict_color.png" width="40%" float:left border:20/>
 
+<table><tr>
+<td><img src="/sample_image/test1.jpg" border=0></td>
+<td><img src="/sample_image/predict_color.png" border=0></td>
+</tr></table>
 
 ### 损失曲线：
 <div align=center><img src="/sample_image/loss&acc.png"/></div>  
