@@ -2,13 +2,12 @@ import cv2
 import numpy as np
 import random
 
-from global_config import Config
+
 from tqdm import tqdm
 import pandas as pd
+import os
 
-
-size = Config.size
-stride = size//2
+size = 256
 
 
 
@@ -142,5 +141,6 @@ def data_augment(xb, yb):
     return xb, yb
 
 if __name__ == '__main__':
-
+    if not os.path.exists('dataset/train/images')
+    if not os.path.exists('dataset/train/labels')
     generate_train_dataset()
