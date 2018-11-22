@@ -39,14 +39,6 @@ Pull requests are welcome.
         <img src="/sample_image/predict_color.png" border=0 margin=1 width=512>
     </td>
 </tr>
-<tr>
-    <td>
-        <img src="/sample_image/test1.jpg" border=0 margin=1 width=512>
-    </td>
-    <td>
-        <img src="/sample_image/predict_color.png" border=0 margin=1 width=512>
-    </td>
-</tr>
 </table>
 
 ### 损失曲线：
