@@ -25,7 +25,7 @@ class Deeplab_v3():
 
         self._batch_norm_decay = batch_norm_decay
         self._batch_norm_epsilon = batch_norm_epsilon
-        self._is_training = tf.placeholder(tf.bool, )
+        self._is_training = tf.placeholder(tf.bool, name='is_training')
         self.num_class = 5
         self.filters = [64, 256, 512, 1024, 2048]
         self.strides = [2, 2, 1, 1]

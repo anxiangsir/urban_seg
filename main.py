@@ -14,10 +14,10 @@ class args:
     lr = 0.002
     display = 500
     weight_decay = 0.00001
-    model_name = 'momentum=0.9;lr=0.002;batch_norm_decay=0.997;'
-    batch_norm_decay = 0.997
+    model_name = 'deeplab_v3'
+    batch_norm_decay = 0.95
     momentum = 0.9
-    best_acc = 0.8
+
 
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "7"
@@ -30,13 +30,13 @@ dataset_val = DataSet(image_path=val_path['image'].values, label_path=val_path['
 
 model = Deeplab_v3(batch_norm_decay=args.batch_norm_decay)
 
-image = tf.placeholder(tf.float32, [None, 256, 256, 3])
+image = tf.placeholder(tf.float32, [None, 256, 256, 3], name='input_x')
 label = tf.placeholder(tf.int32, [None, 256, 256])
 lr = tf.placeholder(tf.float32,)
 
 
 logits = model.forward_pass(image)
-predicts = tf.argmax(logits, axis=-1)
+predicts = tf.argmax(logits, axis=-1, name='predicts')
 
 variables_to_restore = tf.trainable_variables(scope='resnet_v2_50')
 
@@ -55,8 +55,7 @@ l2_loss = args.weight_decay * tf.add_n(
      [tf.nn.l2_loss(tf.cast(v, tf.float32)) for v in tf.trainable_variables()])
 
 optimizer = tf.train.AdamOptimizer(learning_rate=lr)
-# optimizer = tf.train.MomentumOptimizer(learning_rate=lr,
-#                                        momentum=args.momentum)
+
 
 loss = cross_entropy + l2_loss
 
@@ -75,9 +74,10 @@ total_acc_tr, total_acc_val, total_loss_tr, total_loss_val, total_l2_loss = 0, 0
 # 我们要保存所有的参数
 saver = tf.train.Saver(tf.all_variables())
 
-print(model._is_training.name)
-print(image.name)
-print(predicts.name)
+# print(model._is_training.name)
+# print(image.name)
+# print(predicts.name)
+best_val_acc = 0.8
 
 with tf.Session() as sess:
     sess.run(tf.local_variables_initializer())
@@ -146,9 +146,13 @@ with tf.Session() as sess:
             train_summary_writer.flush()
             val_summary_writer.add_summary(val_summary, step)
             val_summary_writer.flush()
+
+
             # 保存模型
-            if (total_acc_val / args.display) > args.best_acc:
+            if (total_acc_val / args.display) > best_val_acc:
+                # 保存acc最高的模型
                 saver.save(sess, model_path + 'model.ckpt')
+                best_val_acc = total_acc_val / args.display
                 tf.logging.info('Save model successfully to "%s"!' % (model_path + 'model.ckpt'))
             # 累计归零
             total_acc_tr, total_acc_val, total_loss_tr, total_loss_val, total_l2_loss = 0, 0, 0, 0, 0

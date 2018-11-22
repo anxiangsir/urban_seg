@@ -14,12 +14,10 @@ def cut_inference_combin_color(ori_image_path,
                                predict_path,
                                color_path):
 
-
     ori_image = cv2.imread(ori_image_path, cv2.CAP_MODE_RGB)
     # 开始切图
     h_step = ori_image.shape[0] // 256
     w_step = ori_image.shape[1] // 256
-
 
     image_list = []
     predict_list = []
@@ -64,9 +62,10 @@ if __name__ == '__main__':
         # 恢复图
         saver.restore(sess, checkpoint_file)
         # 根据节点名在图中找到节点
-        is_training = graph.get_tensor_by_name('Placeholder: 0')
-        input_node = graph.get_tensor_by_name('Placeholder_1: 0')
-        predicts = graph.get_tensor_by_name('ArgMax: 0')
+
+        is_training = graph.get_tensor_by_name('is_training: 0')
+        input_node = graph.get_tensor_by_name('input_x: 0')
+        predicts = graph.get_tensor_by_name('predicts: 0')
 
         # 切图->预测->拼接
         param = {
