@@ -31,19 +31,15 @@ Pull requests are welcome.
 - [ ] TFRecords
 ### 测试图片：
 
-<div width:200px folat:left><img src="/sample_image/test1.jpg" width="25%" height="25%" /></div>
-<div width:200px folat:left><img src="/sample_image/predict_color.png" width="45%"><div/>
+<div width:200px folat:left><img src="/sample_image/test1.jpg" width="25%" /></div>
+<div width:200px folat:left><img src="/sample_image/predict_color.png" width="25%"><div/>
 
 
 <center>
 <img src="/sample_image/test1.jpg" width="25%" height="25%" />
-<img src="/sample_image/predict_color.png" width="45%">
-Figure 1. Lena
+<img src="/sample_image/predict_color.png" width="25%">
 </center>
-<BODY>
-<img src="/sample_image/test1.jpg" width="45%">
-<img src="/sample_image/predict_color.png" width="45%">
-</BODY>
+
 <div align=center><img src="/sample_image/test1.jpg" width="90%"/></div> 
 <div align=center><img src="/sample_image/predict_color.png" width="90%"/></div>  
 
