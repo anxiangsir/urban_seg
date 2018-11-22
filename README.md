@@ -6,8 +6,17 @@ CCF卫星影像的AI分类与识别提供的数据集初赛复赛训练集，一
 * 密码：3ih2
 * 预训练模型：[点击这里下载](http://download.tensorflow.org/models/resnet_v2_50_2017_04_14.tar.gz)  
 
-> origin  5张遥感图片，有标签，用来做训练        
-> test    3张遥感图片，无标签，用来做测试   
+dataset  
+├── origin      5张遥感图片，有标签，用来做训练                        
+├── test        3张遥感图片，无标签，用来做测试                        
+└── train                                          
+    ├── images  为空，通过`python preprocess.py`随机采样生成       
+    └── labels  
+
+
+
+> origin   5张遥感图片，有标签，用来做训练        
+> test     3张遥感图片，无标签，用来做测试   
 > train                   
 >> images  为空，通过`python preprocess.py`随机采样生成  
 >> labels  同images                      
