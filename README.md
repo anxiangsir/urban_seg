@@ -32,7 +32,8 @@ Pull requests are welcome.
 ### 测试图片：
  
 <BODY>
-<img src="/sample_image/test1.jpg"><img src="/sample_image/predict_color.png">
+<img src="/sample_image/test1.jpg width="45%"">
+<img src="/sample_image/predict_color.png" width="45%">
 </BODY>
 <div align=center><img src="/sample_image/test1.jpg" width="90%"/></div> 
 <div align=center><img src="/sample_image/predict_color.png" width="90%"/></div>  
