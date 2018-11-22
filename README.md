@@ -30,6 +30,10 @@ Pull requests are welcome.
 - [ ] Multi-GPU support
 - [ ] TFRecords
 ### 测试图片：
+<body>
+<div folat:left><img src="/sample_image/test1.jpg" width="40%" /></div>
+<div folat:left><img src="/sample_image/predict_color.png" width="40%"><div/>
+</body>
 
 <center>
 <img src="/sample_image/test1.jpg" width="25%" height="25%" />
