@@ -40,7 +40,9 @@ Pull requests are welcome.
     </td>
 </tr>
 <tr>
+    <td>
     <img src="/sample_image/loss&acc.png"/>
+    </td>
 </tr>
 </table>
 
