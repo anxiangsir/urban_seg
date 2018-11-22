@@ -41,7 +41,10 @@ Pull requests are welcome.
 </tr>
 <tr>
     <td>
-    <img src="/sample_image/loss&acc.png"/>
+        <img src="/sample_image/test1.jpg" border=0 margin=1 width=512>
+    </td>
+    <td>
+        <img src="/sample_image/predict_color.png" border=0 margin=1 width=512>
     </td>
 </tr>
 </table>
