@@ -30,10 +30,10 @@ Pull requests are welcome.
 - [ ] Multi-GPU support
 - [ ] TFRecords
 ### 测试图片：
-<body>
+
 <img src="/sample_image/test1.jpg" width="40%" ALIGN=right/>
 <img src="/sample_image/predict_color.png" width="40%" ALIGN=right/>
-</body>
+
 
 ### 损失曲线：
 <div align=center><img src="/sample_image/loss&acc.png"/></div>  
