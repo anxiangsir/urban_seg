@@ -30,8 +30,8 @@ Pull requests are welcome.
  
 <table>
    <tr>
-       <td><img src="/sample_image/test1.jpg"></td>
-       <td><img src="/sample_image/predict_color.png"></td>
+       <td><img src="/sample_image/test1.jpg" width="45%"></td>
+       <td><img src="/sample_image/predict_color.png" width="45%"></td>
    </tr>
 </table>
 <div align=center><img src="/sample_image/test1.jpg" width="90%"/></div> 
