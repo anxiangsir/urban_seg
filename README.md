@@ -31,8 +31,8 @@ Pull requests are welcome.
 - [ ] TFRecords
 ### 测试图片：
 <body>
-<div folat:left><img src="/sample_image/test1.jpg" width="40%"/></div>
-<div folat:left><img src="/sample_image/predict_color.png" width="40%"/><div/>
+<div display:inline><img src="/sample_image/test1.jpg" width="40%"/></div>
+<div display:inline><img src="/sample_image/predict_color.png" width="40%"/><div/>
 </body>
 
 ### 损失曲线：
