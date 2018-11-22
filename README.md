@@ -31,7 +31,7 @@ Pull requests are welcome.
 - [ ] TFRecords
 ### 测试图片：
 
-<table>
+<table border=2>
 <tr>
     <td>
         <img src="/sample_image/test1.jpg" border=0 width=512>
