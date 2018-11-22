@@ -18,7 +18,7 @@ dataset
 ### 采用方法：
 * 使用模型为Deeplab_v3，使用预训练好的resnet_v2_50 fine-tuning
 * 将原始的遥感图像裁成大小为(256x256)的图片块，裁剪的方法为随机采样，并进行数据增强
-### 依赖
+### 依赖：
 * GPU Nvidia Tesla V100 (16G)
 * tensorflow 
 * opencv-python 
