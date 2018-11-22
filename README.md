@@ -39,6 +39,9 @@ Pull requests are welcome.
         <img src="/sample_image/predict_color.png" border=0 margin=1 width=512>
     </td>
 </tr>
+<tr>
+    <img src="/sample_image/loss&acc.png"/>
+</tr>
 </table>
 
 ### 损失曲线：
