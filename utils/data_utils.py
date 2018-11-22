@@ -1,44 +1,7 @@
-import cv2,os
+import cv2, os
 import numpy as np
+from sklearn.model_selection import train_test_split
 import tensorflow as tf
-
-
-
-class Init_DataSet:
-    def __init__(self,
-                 image_path=list(map(lambda x:'dataset/train/images/'+x,os.listdir('dataset/train/images/'))),
-                 label_path=list(map(lambda x:'dataset/train/labels/'+x,os.listdir('dataset/train/images/'))),):
-
-        # 通过读取文件夹，得到所有样本地址的列表
-        image_path = np.array(image_path)
-        label_path = np.array(label_path)
-
-        dataset_num = image_path.shape[0]
-        random_index = np.random.permutation(dataset_num)
-
-        # 打乱
-        image_path = image_path[random_index]
-        label_path = label_path[random_index]
-        # 划分训练集
-        image_path_tr = image_path[:int(dataset_num*0.8)]
-        label_path_tr = label_path[:int(dataset_num*0.8)]
-        # 划分验证集
-        image_path_val = image_path[int(dataset_num*0.8):]
-        label_path_val = label_path[int(dataset_num*0.8):]
-
-
-
-        # 训练集
-        self.train_DataSet = DataSet(image_path_tr,label_path_tr)
-        # 验证集
-        self.val_DataSet = DataSet(image_path_val,label_path_val)
-
-    def get_DataSet(self):
-        return self.train_DataSet, self.val_DataSet
-
-
-
-
 
 
 class DataSet():
@@ -97,10 +60,11 @@ class DataSet():
         x = []
         y = []
         for i in range(x_path.shape[0]):
-            x.append(self.transform(cv2.imread(x_path[i])))
+            x.append(self.transform(cv2.imread(x_path[i], cv2.CAP_MODE_RGB)))
             y.append(cv2.imread(y_path[i], cv2.CAP_MODE_GRAY))
 
-        return np.array(x),np.array(y)
+        return np.array(x), np.array(y)
 
-    def transform(self,img):
+    def transform(self, img):
+
         return img
