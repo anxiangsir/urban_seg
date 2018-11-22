@@ -19,9 +19,11 @@ dataset
 * 使用模型为Deeplab_v3，使用预训练好的resnet_v2_50 fine-tuning
 * 将原始的遥感图像裁成大小为(256x256)的图片块，裁剪的方法为随机采样，并进行数据增强
 ### 依赖
-* tensorflow >= 1.4
-* opencv-python >= 3.4.3
 * GPU Nvidia Tesla V100 (16G)
+* tensorflow 
+* opencv-python 
+* python3
+
 单卡跑一天就可以收敛~
 ### How To Train?
 1. 将百度云中的数据集文件夹dataset下载并存放到项目主目录下
