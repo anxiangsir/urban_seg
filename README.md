@@ -38,6 +38,7 @@ Pull requests are welcome.
 - [ ] Xception as Network Backbone
 - [ ] Multi-GPU support
 - [ ] TFRecords
+- [ ] 后处理优化，比如消除拼接痕迹，CRF后处理
 ### 测试图片：
 <table border=0>
 <tr>
