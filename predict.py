@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import os
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "7"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 
 def cut_inference_combin_color(ori_image_path,
@@ -53,7 +53,7 @@ def cut_inference_combin_color(ori_image_path,
 
 if __name__ == '__main__':
 
-    checkpoint_file = tf.train.latest_checkpoint('ckpts/batch_norm_decay=0.99')
+    checkpoint_file = tf.train.latest_checkpoint('ckpts/deeplab_v3')
     graph = tf.Graph()
     with graph.as_default():
         sess = tf.Session()
@@ -69,12 +69,12 @@ if __name__ == '__main__':
 
         # 切图->预测->拼接
         param = {
-            'ori_image_path': 'dataset/test/2_8bits.png',
+            'ori_image_path': 'dataset/test/3_8bits.png',
             'input_node': input_node,
             'is_training_node': is_training,
             'predict_node': predicts,
-            'predict_path': './annotation.png',
-            'color_path': './color.png'
+            'predict_path': './annotation_1.png',
+            'color_path': './color_3.png'
         }
         cut_inference_combin_color(**param)
 
