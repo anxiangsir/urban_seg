@@ -73,8 +73,8 @@ if __name__ == '__main__':
             'input_node': input_node,
             'is_training_node': is_training,
             'predict_node': predicts,
-            'predict_path': './annotation_1.png',
-            'color_path': './color_3.png'
+            'predict_path': './annotation.png',
+            'color_path': 'sample_image/color_3.png'
         }
         cut_inference_combin_color(**param)
 

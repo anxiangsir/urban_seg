@@ -42,26 +42,22 @@ Pull requests are welcome.
 <table border=0>
 <tr>
     <td>
-        <img src="/sample_image/test1.png" border=0 margin=1 width=512>
+        <img src="/sample_image/test1.png" border=0 margin=1 width=256>
     </td>
     <td>
-        <img src="/sample_image/color_1.png" border=0 margin=1 width=512>
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="/sample_image/test2.png" border=0 margin=1 width=512>
+        <img src="/sample_image/color_1.png" border=0 margin=1 width=256>
     </td>
     <td>
-        <img src="/sample_image/color_2.png" border=0 margin=1 width=512>
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="/sample_image/test3.png" border=0 margin=1 width=512>
+        <img src="/sample_image/test2.png" border=0 margin=1 width=256>
     </td>
     <td>
-        <img src="/sample_image/color_3.png" border=0 margin=1 width=512>
+        <img src="/sample_image/color_2.png" border=0 margin=1 width=256>
+    </td>
+    <td>
+        <img src="/sample_image/test3.png" border=0 margin=1 width=256>
+    </td>
+    <td>
+        <img src="/sample_image/color_3.png" border=0 margin=1 width=256>
     </td>
 </tr>
 </table>

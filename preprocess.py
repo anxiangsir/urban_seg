@@ -141,6 +141,6 @@ def data_augment(xb, yb):
     return xb, yb
 
 if __name__ == '__main__':
-    if not os.path.exists('dataset/train/images')
-    if not os.path.exists('dataset/train/labels')
+    if not os.path.exists('dataset/train/images'): os.mkdir('dataset/train/images')
+    if not os.path.exists('dataset/train/labels'): os.mkdir('dataset/train/labels')
     generate_train_dataset()
