@@ -35,7 +35,6 @@ image = tf.placeholder(tf.float32, [None, 256, 256, 3], name='input_x')
 label = tf.placeholder(tf.int32, [None, 256, 256])
 lr = tf.placeholder(tf.float32,)
 
-
 logits = model.forward_pass(image)
 predicts = tf.argmax(logits, axis=-1, name='predicts')
 
