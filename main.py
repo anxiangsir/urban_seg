@@ -12,15 +12,16 @@ import os
 class args:
     batch_size = 32
     lr = 0.0002
-    display = 500
+    # display = 500
+    display = 10
     weight_decay = 0.00001
     model_name = 'deeplab_v3'
     batch_norm_decay = 0.95
 
 
-
-
+# 使用第8块GPU
 os.environ["CUDA_VISIBLE_DEVICES"] = "7"
+
 data_path_df = pd.read_csv('dataset/path_list.csv')
 
 tf.logging.set_verbosity(tf.logging.INFO)
@@ -83,7 +84,7 @@ with tf.Session() as sess:
     sess.run(tf.local_variables_initializer())
     sess.run(tf.global_variables_initializer())
     # finetune resnet_v2_50参数
-    restorer.restore(sess, 'ckpts/resnet_v2_50/resnet_v2_50.ckpt')
+    # restorer.restore(sess, 'ckpts/resnet_v2_50/resnet_v2_50.ckpt')
 
     log_path = 'logs/%s/' % args.model_name
     model_path = 'ckpts/%s/' % args.model_name
