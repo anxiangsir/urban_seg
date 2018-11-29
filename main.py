@@ -20,7 +20,7 @@ class args:
 
 
 # 使用第8块GPU
-os.environ["CUDA_VISIBLE_DEVICES"] = "7"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "7"
 
 data_path_df = pd.read_csv('dataset/path_list.csv')
 
