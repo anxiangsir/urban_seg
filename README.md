@@ -52,7 +52,16 @@ Pull requests are welcome.
 </table>
 
 ### 损失曲线：
-<div align=center><img src="/sample_image/loss&acc.png"/></div>  
+<table border=0>
+<tr>
+    <td>
+        <img src="/sample_image/acc.png" border=0 margin=1 width=512>
+    </td>
+    <td>
+        <img src="/sample_image/loss.png" border=0 margin=1 width=512>
+    </td>
+</tr>
+</table>
 
 
 

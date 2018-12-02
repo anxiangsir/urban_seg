@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import os
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
 def cut_inference_combin_color(ori_image_path,

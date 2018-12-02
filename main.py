@@ -19,7 +19,7 @@ class args:
     batch_norm_decay = 0.95
 
 
-# 使用第8块GPU
+# 使用第1块GPU
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 data_path_df = pd.read_csv('dataset/path_list.csv')
