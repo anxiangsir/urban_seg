@@ -8,10 +8,10 @@ CCF卫星影像的AI分类与识别提供的数据集初赛复赛训练集，一
 
 ```
 dataset
-├── origin           5张遥感图片，有标签，用来做训练
-├── test             3张遥感图片，无标签，用来做测试
-└── train
-    ├── images       为空，通过`python preprocess.py`随机采样生成
+├── origin 5张遥感图片，有标签，用来做训练
+├── test   3张遥感图片，无标签，用来做测试
+└── train  为空，通过`python preprocess.py`随机采样生成
+    ├── images       
     └── labels
 ```                    
 
