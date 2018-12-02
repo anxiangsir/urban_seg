@@ -51,17 +51,8 @@ Pull requests are welcome.
 </tr>
 </table>
 
-### 损失曲线：
-<table border=0>
-<tr>
-    <td>
-        <img src="/sample_image/acc.png" border=0 margin=1 width=512>
-    </td>
-    <td>
-        <img src="/sample_image/loss.png" border=0 margin=1 width=512>
-    </td>
-</tr>
-</table>
-
+### 训练曲线：
+<div align=center><img src="/sample_image/acc.png"/></div>  
+<div align=center><img src="/sample_image/loss.png"/></div>  
 
 
