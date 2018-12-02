@@ -20,7 +20,7 @@ class args:
 
 
 # 使用第8块GPU
-# os.environ["CUDA_VISIBLE_DEVICES"] = "7"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 data_path_df = pd.read_csv('dataset/path_list.csv')
 
@@ -30,6 +30,7 @@ dataset_tr = DataSet(image_path=train_path['image'].values, label_path=train_pat
 dataset_val = DataSet(image_path=val_path['image'].values, label_path=val_path['label'].values)
 
 model = Deeplab_v3(batch_norm_decay=args.batch_norm_decay)
+
 
 image = tf.placeholder(tf.float32, [None, 256, 256, 3], name='input_x')
 label = tf.placeholder(tf.int32, [None, 256, 256])
