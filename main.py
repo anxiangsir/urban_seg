@@ -88,9 +88,9 @@ with tf.Session() as sess:
 
     log_path = 'logs/%s/' % args.model_name
     model_path = 'ckpts/%s/' % args.model_name
-    if not os.path.exists(model_path): os.mkdir(model_path)
-    if not os.path.exists('./logs'): os.mkdir('./logs')
-    if not os.path.exists(log_path): os.mkdir(log_path)
+    if not os.path.exists(model_path): os.makedirs(model_path)
+    if not os.path.exists('./logs'): os.makedirs('./logs')
+    if not os.path.exists(log_path): os.makedirs(log_path)
     train_summary_writer = tf.summary.FileWriter('%s/train' % log_path, sess.graph)
     val_summary_writer = tf.summary.FileWriter('%s/val' % log_path, sess.graph)
 
