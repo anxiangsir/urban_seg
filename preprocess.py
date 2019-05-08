@@ -26,12 +26,10 @@ def generate_train_dataset(image_num = 99999,
     # 用来记录所有的子图的数目
     g_count = 1
 
-    images_path = ['dataset/origin/1.png',
-                   'dataset/origin/2.png', 'dataset/origin/3.png',
-                   'dataset/origin/4.png', 'dataset/origin/5.png']
-    labels_path = ['dataset/origin/1_class.png',
-                   'dataset/origin/2_class.png', 'dataset/origin/3_class.png',
-                   'dataset/origin/4_class.png', 'dataset/origin/5_class.png']
+    images_path = ['dataset/origin/1.png','dataset/origin/2.png',
+                   'dataset/origin/3.png','dataset/origin/4.png']
+    labels_path = ['dataset/origin/1_class.png','dataset/origin/2_class.png',
+                   'dataset/origin/3_class.png','dataset/origin/4_class.png']
 
     # 每张图片生成子图的个数
     image_each = image_num // len(images_path)

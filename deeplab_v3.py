@@ -25,6 +25,7 @@ class Deeplab_v3():
 
         self._batch_norm_decay = batch_norm_decay
         self._batch_norm_epsilon = batch_norm_epsilon
+        # 模型训练开关占位符
         self._is_training = tf.placeholder(tf.bool, name='is_training')
         self.num_class = 5
         self.filters = [64, 256, 512, 1024, 2048]
@@ -33,7 +34,7 @@ class Deeplab_v3():
 
     def forward_pass(self, x):
         """Build the core model within the graph"""
-        with tf.variable_scope('resnet_v2_50'):
+        with tf.variable_scope('resnet_v2_50', reuse=tf.AUTO_REUSE):
             size = tf.shape(x)[1:3]
 
             x = x - [_R_MEAN, _G_MEAN, _B_MEAN]
@@ -56,12 +57,13 @@ class Deeplab_v3():
                 tf.logging.info('the shape of features after block%d is %s' % (i+1, x.get_shape()))
 
         # DeepLab_v3的部分
-        with tf.variable_scope('DeepLab_v3'):
+        with tf.variable_scope('DeepLab_v3', reuse=tf.AUTO_REUSE):
             x = self._atrous_spatial_pyramid_pooling(x)
             x = self._conv(x, 1, 5, 1, 'logits', False, False)
             x = tf.image.resize_bilinear(x, size)
             return x
-
+    def _A_ASPP(self):
+        pass
     def _atrous_spatial_pyramid_pooling(self, x):
         """空洞空间金字塔池化
         """
