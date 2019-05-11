@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="10.90.6.19" showDialogOnRemoteDnD="false">
+    <serverData>
+      <paths name="10.90.6.19">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/lichao/deeplabv3-Tensorflow" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

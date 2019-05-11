@@ -1,17 +1,16 @@
 from deeplab_v3 import Deeplab_v3
-from utils.data_utils import DataSet
+from data_utils import DataSet
 
 
 import cv2
 import os
-import argparse
 import tensorflow as tf
 import pandas as pd
 import numpy as np
-from utils.color_utils import color_predicts
-from utils.predicts_utils import total_image_predict
+from color_utils import color_predicts
+from predicts_utils import total_image_predict
 
-from utils.metric_utils import iou
+from metric_utils import iou
 
 
 class args:
