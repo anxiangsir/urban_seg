@@ -93,7 +93,7 @@ def multi_scale_predict(image: np.ndarray, input_placeholder: tf.placeholder,
         return predict(image, **kwargs)
 
 
-def cut_combine_predict(ori_image_path: str,
+def total_image_predict(ori_image_path: str,
                         input_placeholder: tf.placeholder,
                         is_training_placeholder: tf.placeholder,
                         logits_prob_node: tf.Tensor,
