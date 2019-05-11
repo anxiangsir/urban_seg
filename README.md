@@ -25,23 +25,23 @@ dataset
 ### 最终结果：
 评价方法为 mean-IoU，在数据集极少的情况下，测试集评价结果得到了 **77.3** 的分数
 
-| 方法 | mean-IoU | 居中对齐 |
-| :-----| ----: | :----: |
-| baseline(deeplabv3) | 71.2 | 单元格 |
-| resnet-v2-50 pretrain | 77.1 | 单元格 |
-| 旋转四次预测取平均 | 77.3 | 单元格 |
+| 方法 | mean-IoU | 
+| :-----| :----: |  
+| baseline(deeplabv3) | 71.2 | 
+| resnet-v2-50 pretrain | 77.1 | 
+| 旋转四次预测取平均 | 77.3 | 
 
     
 ### 如何训练
-将百度云中的数据集文件夹dataset下载并存放到项目主目录下
 ```
+将百度云中的数据集文件夹dataset下载并存放到项目主目录下
 python proprecess.py 时间稍长，需要等待
 python train.py 时间稍长，可以更改args.test_display 多久查看一次测试结果
 ```
 
 ### 如何可视化训练过程
-cd 到主目录下
 ```
+cd 到主目录下
 tensorboard --logdir=./
 ```
 
@@ -54,5 +54,13 @@ tensorboard --logdir=./
     <td>
         <img src="/images/step_50000.png" border=0 margin=1 width=512>
     </td>
+</tr><tr>
+    <td>
+        step = 10000
+    </td>
+    <td>
+        step = 50000
+    </td>
 </tr>
+
 </table>
