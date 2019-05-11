@@ -55,8 +55,8 @@ tensorboard --logdir=./
     <td><img src="/images/step_50000.png" border=0 margin=1 width=512></td>
 </tr>
 <tr>
-    <td>step = 10000</td>
-    <td>step = 50000</td>
+    <td>模型预测step = 10000</td>
+    <td>模型预测step = 50000</td>
 </tr>
 <tr>
     <td><img src="images/5_view.png" border=0 margin=1 width=512></td>
