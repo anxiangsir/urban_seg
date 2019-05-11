@@ -10,13 +10,8 @@ import pandas as pd
 import numpy as np
 from utils.color_utils import color_predicts
 from utils.predicts_utils import total_image_predict
-# from predict import cut_inference_combin_color
+
 from utils.metric_utils import iou
-
-
-# parser = argparse.ArgumentParser()
-# parser.add_argument('--batch_size', type=int, default=16)
-# args = parser.parse_args()
 
 
 class args:
@@ -29,7 +24,7 @@ class args:
     test_image_path = 'dataset/origin/5.png'
     test_label_path = 'dataset/origin/5_class.png'
     multi_scale = True # 是否多尺度预测
-    gpu_num = 1
+    gpu_num = 0
     pretraining = False
 
 # 打印以下超参数
