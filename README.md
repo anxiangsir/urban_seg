@@ -1,4 +1,5 @@
 # 基于Deeplab-v3对遥感图像的语义分割
+QQ:2812728382
 
 ### 数据集：
 CCF卫星影像的AI分类与识别提供的数据集初赛复赛训练集，一共五张卫星遥感影像
@@ -19,6 +20,7 @@ dataset
 ### 主要策略：
 - [x] 将原始的遥感图像裁成大小为(256x256)的图片块，裁剪的方法为随机采样，并进行数据扩增
 - [x] 搭建Deeplab-v3模型，使用预训练的 resnet-v2-50 迁移学习
+- [x] 完整的训练测试程序，使用 tensorboard 监控模型训练
 - [ ] 后处理优化，比如消除预测图片拼接痕迹
 - [ ] 使用更好的骨干网络，如 Xception
 
@@ -45,7 +47,7 @@ cd 到主目录下
 tensorboard --logdir=./
 ```
 
-测试结果：
+### 测试结果： 
 <table border=0>
 <tr>
     <td><img src="/images/step_10000.png" border=0 margin=1 width=512></td>
