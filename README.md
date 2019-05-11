@@ -48,20 +48,19 @@ tensorboard --logdir=./
 测试结果：
 <table border=0>
 <tr>
-    <td>
-        <img src="/images/step_10000.png" border=0 margin=1 width=512>
-    </td>
-    <td>
-        <img src="/images/step_50000.png" border=0 margin=1 width=512>
-    </td>
+    <td><img src="/images/step_10000.png" border=0 margin=1 width=512></td>
+    <td><img src="/images/step_50000.png" border=0 margin=1 width=512></td>
 </tr>
 <tr>
-    <td align="center" valign="middle">
-        step = 10000
-    </td>
-    <td align="center" valign="middle">
-        step = 50000
-    </td>
+    <td>step = 10000</td>
+    <td>step = 50000</td>
 </tr>
-
+<tr>
+    <td><img src="images/5_view.png" border=0 margin=1 width=512></td>
+    <td><img src="images/5_color.png" border=0 margin=1 width=512></td>
+</tr>
+<tr>
+    <td>测试图片缩略图</td>
+    <td>测试图片标签上色图</td>
+</tr>
 </table>
