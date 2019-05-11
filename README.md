@@ -17,19 +17,19 @@ dataset
 其中我们使用前四张用来做训练，最后一张用来做测试
 
 ### 主要策略：
-* 将原始的遥感图像裁成大小为(256x256)的图片块，裁剪的方法为随机采样，并进行数据扩增
-* 搭建Deeplab-v3模型，使用预训练的 resnet-v2-50 迁移学习
-* 后处理优化，比如消除预测图片拼接痕迹(未完成)
-* 使用更好的骨干网络，如Xception(未完成)
+- [x] 将原始的遥感图像裁成大小为(256x256)的图片块，裁剪的方法为随机采样，并进行数据扩增
+- [x] 搭建Deeplab-v3模型，使用预训练的 resnet-v2-50 迁移学习
+- [ ] 后处理优化，比如消除预测图片拼接痕迹
+- [ ] 使用更好的骨干网络，如 Xception
 
 ### 最终结果：
 评价方法为 mean-IoU，在数据集极少的情况下，测试集评价结果得到了 **77.3** 的分数
 
-| 方法 | mean-IoU | 
-| :-----| :----: |  
-| baseline(deeplabv3) | 71.2 | 
-| resnet-v2-50 pretrain | 77.1 | 
-| 旋转四次预测取平均 | 77.3 | 
+| 方法 | mean-IoU | accuracy |
+| :-----| :----: |  :----: |
+| baseline(deeplabv3) | 71.2 | - |
+| resnet-v2-50 pretrain | 77.1 | - |
+| 旋转四次预测取平均 | 77.3 | 85.5 |
 
     
 ### 如何训练
@@ -54,11 +54,12 @@ tensorboard --logdir=./
     <td>
         <img src="/images/step_50000.png" border=0 margin=1 width=512>
     </td>
-</tr><tr>
-    <td>
+</tr>
+<tr>
+    <td align="center" valign="middle">
         step = 10000
     </td>
-    <td>
+    <td align="center" valign="middle">
         step = 50000
     </td>
 </tr>
