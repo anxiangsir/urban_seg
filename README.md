@@ -66,10 +66,18 @@ tensorboard --logdir=./
     <td>测试图片缩略图</td>
     <td>测试图片标签上色图</td>
 </tr>
+</table>
 <tr>
-    <td><img src="images/metric.png" border=0 margin=1 width=1024></td>
+    <td><img src="images/metric.png" border=0 margin=1></td>
 </tr>
 <tr>
     <td>tensorboard</td>
 </tr>    
-</table>
+<table border=0>
+<tr>
+    <td><img src="images/metric.png" border=0 margin=1></td>
+</tr>
+<tr>
+    <td>tensorboard</td>
+</tr>    
+</table> 
