@@ -73,11 +73,3 @@ tensorboard --logdir=./
 <tr>
     <td>tensorboard</td>
 </tr>    
-<table border=0>
-<tr>
-    <td><img src="images/metric.png" border=0 margin=1></td>
-</tr>
-<tr>
-    <td>tensorboard</td>
-</tr>    
-</table> 
