@@ -19,7 +19,7 @@ dataset
 
 ### dependency
 pip install opencv-python==3.4.2.17
-pip install tensorflow-gpu 1.4.0
+pip install tensorflow-gpu==1.13.1
 
 ### 主要策略：
 - [x] 将原始的遥感图像裁成大小为(256x256)的图片块，裁剪的方法为随机采样，并进行数据扩增
