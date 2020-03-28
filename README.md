@@ -18,9 +18,9 @@ dataset
 其中我们使用前四张用来做训练，最后一张用来做测试
 
 ### dependency
-cuda==8.0
-cudnn==6
-python==3.5    
+cuda==8.0  
+cudnn==6  
+python==3.5     
 pip install opencv-python==3.4.2.17    
 pip install tensorflow-gpu==1.13.1  
 pip install sklearn
