@@ -18,7 +18,7 @@ dataset
 其中我们使用前四张用来做训练，最后一张用来做测试
 
 ### dependency
-pip install opencv-python==3.4.2.17
+pip install opencv-python==3.4.2.17  
 pip install tensorflow-gpu==1.13.1
 
 ### 主要策略：
