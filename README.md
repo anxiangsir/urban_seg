@@ -20,7 +20,7 @@ dataset
 ### dependency
 python==3.6
 pip install opencv-python==3.4.2.17  
-pip install tensorflow-gpu==1.13.1
+pip install tensorflow-gpu==1.13.1  
 pip install sklearn
 
 ### 主要策略：
