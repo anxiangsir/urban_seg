@@ -1,10 +1,32 @@
-# 基于Deeplab-v3对遥感图像的语义分割
+# 项目名称
 
-### 数据集：
+这个项目是一个面向新手的基于遥感图片的语义分割项目。
+
+我们使用了在4亿张图片上进行预训练的unicom模型，这个模型非常高效，在遥感分割任务上表现优异。
+令人惊讶的是，我们只使用了4张遥感图片进行训练，就能够获得非常好的效果。  
+
+如果您想快速开始，可以使用 `train_one_gpu.py` 来启动训练，这是个简易的代码，只有200行。
+但如果您追求更好的性能，可以尝试使用稍微复杂一些的代码 `train_multi_gpus.py`，该代码支持多GPU训练。
+
+请注意，`train_multi_gpus.py` 可能需要一些额外的配置和设置，以便正确地运行多GPU训练。确保在使用之前仔细阅读代码中的说明和文档，以确保正确设置和配置。
+
+
+## 安装
+
+```bash
+git clone https://github.com/anxiangsir/deeplabv3-Tensorflow.git
+```
+
+## 用法
+
+### 安装依赖
+```bash
+pip install -r requirements.txt
+```
+
+### 数据和预训练模型
 CCF卫星影像的AI分类与识别提供的数据集初赛复赛训练集，一共五张卫星遥感影像
-* 百度云盘：[点击这里](https://pan.baidu.com/s/1LWBMklOr39yI7fYRQ185Og)  
-* 密码：3ih2
-* 预训练模型：[点击这里下载](http://download.tensorflow.org/models/resnet_v2_50_2017_04_14.tar.gz)  
+* 百度云盘：[点击这里](https://pan.baidu.com/s/1LWBMklOr39yI7fYRQ185Og)，密码：3ih2
 
 ```
 dataset
@@ -13,71 +35,45 @@ dataset
 └── train  //为空，通过`python preprocess.py`随机采样生成
     ├── images       
     └── labels
-```     
-其中我们使用前四张用来做训练，最后一张用来做测试
-
-### dependency
-cuda==8.0  
-cudnn==6  
-python==3.5     
-pip install opencv-python==3.4.2.17    
-pip install tensorflow-gpu==1.13.1  
-pip install sklearn
-pip install pandas
-
-### 主要策略：
-- [x] 将原始的遥感图像裁成大小为(256x256)的图片块，裁剪的方法为随机采样，并进行数据扩增
-- [x] 搭建Deeplab-v3模型，使用预训练的 resnet-v2-50 迁移学习
-- [x] 完整的训练测试程序，使用 tensorboard 监控模型训练
-- [x] 多尺度拼接预测，提升模型
-- [ ] 后处理优化，比如消除预测图片拼接痕迹
-- [ ] 使用更好的骨干网络，如 Xception
-
-### 最终结果：
-评价方法为 mean-IoU，在数据集极少的情况下，测试集评价结果得到了 **77.3** 的分数
-
-| 方法 | mean-IoU | accuracy |
-| :-----| :----: |  :----: |
-| baseline(deeplabv3) | 71.2 | - |
-| resnet-v2-50 pretrain | 77.1 | - |
-| 旋转四次预测取平均 | 77.6 | 85.5 |
-
-    
-### 如何训练
-```
-将百度云中的数据集文件夹dataset下载并存放到项目主目录下
-python proprecess.py 时间稍长，需要等待
-python train.py 时间稍长，可以更改args.test_display 多久查看一次测试结果
+FP16-ViT-B-32.pt
+FP16-ViT-B-16.pt
+FP16-ViT-L-14.pt
+FP16-ViT-L-14-336px.pt
 ```
 
-### 如何可视化训练过程
+### 一张GPU训练
+
+1. 下载数据集到当前目录 
+2. 预处理数据  
+```bash
+python preprocess.py
 ```
-cd 到主目录下
-tensorboard --logdir=./
+3. 训练
+```bash
+python train_one_gpu.py
 ```
 
-### 测试结果： 
-<table border=0>
-<tr>
-    <td><img src="/images/step_10000.png" border=0 margin=1 width=512></td>
-    <td><img src="/images/step_50000.png" border=0 margin=1 width=512></td>
-</tr>
-<tr>
-    <td>模型预测step = 10000</td>
-    <td>模型预测step = 50000</td>
-</tr>
-<tr>
-    <td><img src="images/5_view.png" border=0 margin=1 width=512></td>
-    <td><img src="images/5_color.png" border=0 margin=1 width=512></td>
-</tr>
-<tr>
-    <td>测试图片缩略图</td>
-    <td>测试图片标签上色图</td>
-</tr>
-</table>
-<tr>
-    <td><img src="images/metric.png" border=0 margin=1></td>
-</tr>
-<tr>
-    <td>tensorboard</td>
-</tr>    
+### 八张GPU训练
+1. 下载数据集到当前目录 
+2. 预处理数据  
+```bash
+python preprocess.py
+```
+3. 训练
+torchrun --nproc_per_node 8 train_multi_gpus.py
+
+
+## 和我们讨论反馈
+QQ群：679897048
+
+
+## 引用我们
+如果你觉得这个项目对你有用，欢迎引用我们的论文
+```
+@inproceedings{anxiang_2023_unicom,
+  title={Unicom: Universal and Compact Representation Learning for Image Retrieval},
+  author={An, Xiang and Deng, Jiankang and Yang, Kaicheng and Li, Jiawei and Feng, Ziyong and Guo, Jia and Yang, Jing and Liu, Tongliang},
+  booktitle={ICLR},
+  year={2023}
+}
+```
