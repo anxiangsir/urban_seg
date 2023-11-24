@@ -1,4 +1,4 @@
-# 项目名称
+# Seg
 
 这个项目是一个面向新手的基于遥感图片的语义分割项目。
 
@@ -14,7 +14,7 @@
 ## 安装
 
 ```bash
-git clone https://github.com/anxiangsir/deeplabv3-Tensorflow.git
+git clone https://github.com/anxiangsir/urban_seg.git
 ```
 
 ## 用法
