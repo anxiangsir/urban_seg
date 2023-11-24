@@ -60,7 +60,9 @@ python train_one_gpu.py
 python preprocess.py
 ```
 3. 训练
+```
 torchrun --nproc_per_node 8 train_multi_gpus.py
+```
 
 
 ## 和我们讨论反馈
