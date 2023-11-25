@@ -1,4 +1,13 @@
 # urban_seg [english](https://github.com/anxiangsir/urban_seg#urban_seg-1)
+
+这个项目是一个面向新手的基于遥感图片的语义分割项目。
+我们使用了在**4亿**张图片上进行预训练的unicom模型，这个模型非常高效，在遥感分割任务上表现优异。
+令人惊讶的是，我们仅仅使用了**4**张遥感图片进行训练，就能够获得非常好的效果。  
+如果您想快速开始，可以使用 `train_one_gpu.py` 来启动训练，这是个简易的代码，只有200行。
+但如果您追求更好的性能，可以尝试使用稍微复杂一些的代码 `train_multi_gpus.py`，该代码支持多GPU训练。
+
+请注意，`train_multi_gpus.py` 可能需要一些额外的配置和设置，以便正确地运行多GPU训练。确保在使用之前仔细阅读代码中的说明和文档，以确保正确设置和配置。
+
 <table>
   <tr>
     <td><img src="figures/test.jpg" alt="JPG Image"></td>
@@ -13,22 +22,12 @@
 
 <!-- ![JPG Image](figures/test.jpg) ![GIF Image](figures/predict.gif) -->
 
-这个项目是一个面向新手的基于遥感图片的语义分割项目。
-我们使用了在**4亿**张图片上进行预训练的unicom模型，这个模型非常高效，在遥感分割任务上表现优异。
-令人惊讶的是，我们仅仅使用了**4**张遥感图片进行训练，就能够获得非常好的效果。  
-如果您想快速开始，可以使用 `train_one_gpu.py` 来启动训练，这是个简易的代码，只有200行。
-但如果您追求更好的性能，可以尝试使用稍微复杂一些的代码 `train_multi_gpus.py`，该代码支持多GPU训练。
-
-请注意，`train_multi_gpus.py` 可能需要一些额外的配置和设置，以便正确地运行多GPU训练。确保在使用之前仔细阅读代码中的说明和文档，以确保正确设置和配置。
-
 
 ## 安装
 
 ```bash
 git clone https://github.com/anxiangsir/urban_seg.git
 ```
-
-## 用法
 
 ### 安装依赖
 ```bash
