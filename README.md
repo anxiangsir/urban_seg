@@ -1,6 +1,13 @@
 # urban_seg
 
-![JPG Image](figures/test.jpg) ![GIF Image](figures/predict.gif)
+<table>
+  <tr>
+    <td><img src="figures/test.jpg" alt="JPG Image"></td>
+    <td><img src="figures/predict.gif" alt="GIF Image"></td>
+  </tr>
+</table>
+
+<!-- ![JPG Image](figures/test.jpg) ![GIF Image](figures/predict.gif) -->
 
 这个项目是一个面向新手的基于遥感图片的语义分割项目。
 我们使用了在**4亿**张图片上进行预训练的unicom模型，这个模型非常高效，在遥感分割任务上表现优异。
