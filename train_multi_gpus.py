@@ -5,8 +5,8 @@ import cv2
 import numpy as np
 import torch
 from PIL import Image
-from torch import distributed
-from torch.nn import Conv2d, LayerNorm, ReLU, Upsample
+from torch import distributed, nn
+from torch.nn import GELU, Conv2d, ConvTranspose2d, LayerNorm, ReLU, Upsample
 from torch.nn.parallel import DistributedDataParallel
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import LinearLR
@@ -24,10 +24,12 @@ rank = int(os.getenv("RANK", "0"))
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch_size', type=int, default=32)
+parser.add_argument('--frequent', type=int, default=50)
+parser.add_argument('--image_size', type=int, default=224)
 parser.add_argument('--model', type=str, default='ViT-L/14',
                     choices=['ViT-B/32', 'ViT-B/16', 'ViT-L/14', 'ViT-L/14@336px'])
-parser.add_argument('--total_steps', type=int, default=20000)
-parser.add_argument('--frequent', type=int, default=300)
+parser.add_argument('--total_steps', type=int, default=40000)
+
 args = parser.parse_args()
 
 os.makedirs("output", exist_ok=True)
@@ -52,6 +54,9 @@ def main():
     elif args.model == "ViT-L/14@336px":
         my_model.load_state_dict(torch.load(
             "FP16-ViT-L-14-336px.pt", "cpu"), strict=True)
+        my_model_seg = MyModelSeg(
+            seq_length=576, dimension=1024).cuda().train()
+        args.image_size = 336
 
     my_dataset = MyDataset(transform)
     my_sampler = DistributedSampler(my_dataset, shuffle=True)
@@ -59,9 +64,8 @@ def main():
         my_dataset, args.batch_size,
         num_workers=8, sampler=my_sampler, drop_last=True)
 
-
     my_optimizer = AdamW([
-        {"params": my_model_seg.parameters(), "lr": 0.0005},
+        {"params": my_model_seg.parameters(), "lr": 0.001},
         {"params": my_model.parameters(), "lr": 0.00001},
     ], weight_decay=0.1)
     my_linear_lr = LinearLR(
@@ -95,7 +99,7 @@ def main():
             my_optimizer.zero_grad()
             step += 1
             if step % args.frequent == 0:
-                output, metric = evaluate(my_model, my_model_seg)
+                output, metric = evaluate(my_model, my_model_seg, image_size=args.image_size)
                 output = output.cpu().numpy()
                 color = np.ones([output.shape[0], output.shape[1], 3])
                 color[output == 0] = [255, 255, 255]  # 其他，白色，0
@@ -113,7 +117,7 @@ def main():
                             f"step: {step :07d} loss: {loss.item() :.4f} dice: {metric.item() :.4f}")
         if step > args.total_steps and rank == 0:
             torch.save(my_model_seg.state_dict(), "model.pt")
-            break
+            exit()
 
 
 class MyDataset(torch.utils.data.Dataset):
@@ -136,7 +140,6 @@ class MyDataset(torch.utils.data.Dataset):
     def __len__(self):
         return len(self.lines)
 
-
 class MyModelSeg(torch.nn.Module):
     def __init__(self, seq_length=49, dimension=768) -> None:
         super().__init__()
@@ -144,59 +147,77 @@ class MyModelSeg(torch.nn.Module):
         self.dimension = dimension
 
         if seq_length == 49:
-            self.layers_init = torch.nn.Sequential(
+            self.layers = torch.nn.Sequential(
                 # B x dimension x 7 x 7
-                Upsample(scale_factor=2),
-                Conv2d(dimension, 768, (1, 1), 1, 0, bias=False),
-                ReLU(),
-                Conv2d(768, 768, (3, 3), 1, (1, 1), bias=False),
-                LayerNorm([768, 14, 14]),
-                ReLU(),
+                ConvTranspose2d(dimension, 768, kernel_size=2, stride=2),
+                LayerNorm2d(768),
+                GELU(),
                 # B x 768 x 14 x 14
-                Upsample(scale_factor=2),
-                Conv2d(768, 384, (1, 1), 1, 0, bias=False),
-                ReLU(),
-                Conv2d(384, 384, (3, 3), 1, (1, 1), bias=False),
-                LayerNorm([384, 28, 28]),
-                ReLU(),
+                ConvTranspose2d(768, 384, kernel_size=2, stride=2),
+                LayerNorm2d(384),
+                GELU(),
+                # B x 384 x 28 x 28
+                ConvTranspose2d(384, 196, kernel_size=2, stride=2),
+                LayerNorm2d(196),
+                GELU(),
+                # B x 192 x 56 x 56
+                ConvTranspose2d(196, 96, kernel_size=2, stride=2),
+                LayerNorm2d(96),
+                GELU(),
+                # B x 96 x 112 x 112
+                ConvTranspose2d(96, 48, kernel_size=2, stride=2),
+                LayerNorm2d(48),
+                GELU(),
+                # B x 48 x 224 x 224
+                Conv2d(48, 5, (1, 1), 1, 0, bias=False)
             )
         elif seq_length == 196:
-            self.layers_init = torch.nn.Sequential(
+            self.layers = torch.nn.Sequential(
                 # B x dimension x 14 x 14
-                Upsample(scale_factor=2),
-                Conv2d(dimension, 384, (1, 1), 1, 0, bias=False),
-                ReLU(),
-                Conv2d(384, 384, (3, 3), 1, (1, 1), bias=False),
-                LayerNorm([384, 28, 28]),
-                ReLU(),
+                ConvTranspose2d(dimension, 384, kernel_size=2, stride=2),
+                LayerNorm2d(384),
+                GELU(),
+                # B x 384 x 28 x 28
+                ConvTranspose2d(384, 196, kernel_size=2, stride=2),
+                LayerNorm2d(196),
+                GELU(),
+                # B x 192 x 56 x 56
+                ConvTranspose2d(196, 96, kernel_size=2, stride=2),
+                LayerNorm2d(96),
+                GELU(),
+                # B x 96 x 112 x 112
+                ConvTranspose2d(96, 48, kernel_size=2, stride=2),
+                LayerNorm2d(48),
+                GELU(),
+                # B x 48 x 224 x 224
+                Conv2d(48, 5, (1, 1), 1, 0, bias=False)
+            )
+        elif seq_length == 576:
+            self.layers = torch.nn.Sequential(
+                # B x dimension x 21 x 21
+                ConvTranspose2d(dimension, 512, kernel_size=2, stride=2),
+                LayerNorm2d(512),
+                GELU(),
+                # B x 384 x 42 x 42
+                ConvTranspose2d(512, 256, kernel_size=2, stride=2),
+                LayerNorm2d(256),
+                GELU(),
+                # B x 192 x 84 x 84
+                ConvTranspose2d(256, 128, kernel_size=2, stride=2),
+                LayerNorm2d(128),
+                GELU(),
+                # B x 96 x 168 x 168
+                ConvTranspose2d(128, 64, kernel_size=2, stride=2),
+                LayerNorm2d(64),
+                GELU(),
+                # B x 48 x 336 x 336
+                Conv2d(64, 5, (1, 1), 1, 0, bias=False)
             )
         else:
             raise NotImplementedError
 
-        self.layers = torch.nn.Sequential(
-            # B x 384 x 28 x 28
-            Upsample(scale_factor=2),
-            Conv2d(384, 192, (1, 1), 1, 0, bias=False),
-            ReLU(),
-            Conv2d(192, 192, (3, 3), 1, (1, 1), bias=False),
-            LayerNorm([192, 56, 56]),
-            ReLU(),
-            # B x 192 x 56 x 56
-            Upsample(scale_factor=2),
-            Conv2d(192, 96, (1, 1), 1, 0, bias=False),
-            ReLU(),
-            Conv2d(96, 96, (3, 3), 1, (1, 1), bias=False),
-            LayerNorm([96, 112, 112]),
-            ReLU(),
-            # B x 96 x 112 x 112
-            Upsample(scale_factor=2),
-            Conv2d(96, 48, (1, 1), 1, 0, bias=False),
-            ReLU(),
-            Conv2d(48, 48, (3, 3), 1, (1, 1), bias=False),
-            LayerNorm([48, 224, 224]),
-            ReLU(),
-            # B x 48 x 224 x 224
-            Conv2d(48, 5, (1, 1), 1, 0, bias=False))
+
+
 
     def forward(self, x):
         B, S, D = x.size()
@@ -205,12 +226,29 @@ class MyModelSeg(torch.nn.Module):
         elif self.seq_length == 196:
             x = torch.reshape(x, (B, 16, 16, self.dimension))
             x = x[:, 1:15, 1:15, :]
+        elif self.seq_length == 576:
+            x = torch.reshape(x, (B, 24, 24, self.dimension))
+            x = x[:, 0:21, 0:21, :]
 
         x: torch.Tensor
         x = x.permute(0, 3, 1, 2)
-        x = self.layers_init(x)
         x = self.layers(x)
         x = x.permute(0, 2, 3, 1)
+        return x
+
+
+class LayerNorm2d(nn.Module):
+    def __init__(self, num_channels: int, eps: float = 1e-6) -> None:
+        super().__init__()
+        self.weight = nn.Parameter(torch.ones(num_channels))
+        self.bias = nn.Parameter(torch.zeros(num_channels))
+        self.eps = eps
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        u = x.mean(1, keepdim=True)
+        s = (x - u).pow(2).mean(1, keepdim=True)
+        x = (x - u) / torch.sqrt(s + self.eps)
+        x = self.weight[:, None, None] * x + self.bias[:, None, None]
         return x
 
 

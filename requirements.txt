@@ -1,3 +1,4 @@
 pandas
+timm
 torch
 torchmetrics

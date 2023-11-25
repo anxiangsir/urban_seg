@@ -1,7 +1,8 @@
 # urban_seg
 
-这个项目是一个面向新手的基于遥感图片的语义分割项目。
+![JPG Image](figures/test.jpg) ![GIF Image](figures/predict.gif)
 
+这个项目是一个面向新手的基于遥感图片的语义分割项目。
 我们使用了在**4亿**张图片上进行预训练的unicom模型，这个模型非常高效，在遥感分割任务上表现优异。
 令人惊讶的是，我们仅仅使用了**4**张遥感图片进行训练，就能够获得非常好的效果。  
 如果您想快速开始，可以使用 `train_one_gpu.py` 来启动训练，这是个简易的代码，只有200行。
@@ -24,8 +25,10 @@ pip install -r requirements.txt
 ```
 
 ### 数据和预训练模型
+
 CCF卫星影像的AI分类与识别提供的数据集初赛复赛训练集，一共五张卫星遥感影像
-* 百度云盘：[点击这里](https://pan.baidu.com/s/1LWBMklOr39yI7fYRQ185Og)，密码：3ih2
+
+[百度云盘](https://pan.baidu.com/s/1LWBMklOr39yI7fYRQ185Og)，密码：3ih2
 
 ```
 dataset
