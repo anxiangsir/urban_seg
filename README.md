@@ -4,6 +4,8 @@
   <tr>
     <td><img src="figures/test.jpg" alt="JPG Image"></td>
     <td><img src="figures/predict.gif" alt="GIF Image"></td>
+    <td><img src="figures/test_02.jpg" alt="JPG Image"></td>
+    <td><img src="figures/predict_02.gif" alt="GIF Image"></td>
   </tr>
 </table>
 
