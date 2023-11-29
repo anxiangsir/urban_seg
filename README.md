@@ -1,4 +1,4 @@
-# urban_seg
+# urban_seg  QQ Group: 679897018
 
 这个项目是一个面向新手的基于遥感图片的语义分割项目。
 我们使用了在**4亿**张图片上进行预训练的 [unicom](https://github.com/deepglint/unicom) 模型，这个模型非常高效，在遥感分割任务上表现优异。
