@@ -94,7 +94,6 @@ torchrun --nproc_per_node 8 train_multi_gpus.py
 ## 和我们讨论反馈
 ## Discuss feedback with us
 QQ群：679897018
-
 QQ Group: 679897018
 
 ## 引用我们
