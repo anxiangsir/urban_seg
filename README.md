@@ -1,9 +1,6 @@
-# 🌆 Urban Segmentation Project | 城市分割项目 
-**QQ Group: 679897018**  
-[![GitHub Stars](https://img.shields.io/github/stars/anxiangsir/urban_seg?style=social)](https://github.com/anxiangsir/urban_seg) 
+# 🌆 Urban Segmentation Project | 城市分割项目    
 [![LICENSE](https://img.shields.io/badge/license-MIT-green)](https://github.com/anxiangsir/urban_seg/blob/main/LICENSE)
 
----
 
 ## 🚀 项目概述 | Project Overview
 ### 中文
