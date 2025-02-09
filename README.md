@@ -7,7 +7,7 @@
 
 ## 🚀 项目概述 | Project Overview
 ### 中文
-这是一个面向新手的遥感图像语义分割项目。我们使用了在**4亿张图像**上预训练的[unicom模型](https://github.com/deepglint/unicom)，该模型在遥感分割任务中表现出色。令人惊讶的是，仅使用**4张遥感图像**进行训练即可获得优异效果。
+这是一个面向新手的遥感图像语义分割项目。我们使用了在**4亿张图像**上预训练的 [unicom模型](https://github.com/deepglint/unicom)，该模型在遥感分割任务中表现出色。令人惊讶的是，仅使用**4张遥感图像**进行训练即可获得优异效果。
 
 ### English
 This is a beginner-friendly semantic segmentation project for remote sensing images. We employ the [unicom model](https://github.com/deepglint/unicom) pre-trained on 400 million images, which demonstrates outstanding performance on remote sensing segmentation tasks. Remarkably, it achieves excellent results with just **4 training images**.
@@ -74,6 +74,10 @@ dataset
 python preprocess.py  # 随机采样生成训练集 | Generate training set via random sampling
 ```
 ### 预训练模型 | Pretrained Models
+
+请从这里下载：  
+https://github.com/deepglint/unicom/releases
+
 ```
 FP16-ViT-B-32.pt
 FP16-ViT-B-16.pt
