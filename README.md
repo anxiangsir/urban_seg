@@ -88,13 +88,11 @@ CCF卫星影像的AI分类与识别提供的数据集初赛复赛训练集，一
 
 ## 📜 引用我们 | Citation
 ```shell
-@inproceedings{anxiang_2023_,
-  title     = {: Universal and Compact Representation Learning for Image Retrieval},
-  author    = {An, Xiang and Deng, Jiankang and Yang, Kaicheng and 
-               Li, Jiawei and Feng, Ziyong and Guo, Jia and 
-               Yang, Jing and Liu, Tongliang},
-  booktitle = {International Conference on Learning Representations (ICLR)},
-  year      = {2023}
+@inproceedings{anxiang_2023_unicom,
+  title={Unicom: Universal and Compact Representation Learning for Image Retrieval},
+  author={An, Xiang and Deng, Jiankang and Yang, Kaicheng and Li, Jiawei and Feng, Ziyong and Guo, Jia and Yang, Jing and Liu, Tongliang},
+  booktitle={ICLR},
+  year={2023}
 }
 ```
 ## 💬 交流社区 | Community
