@@ -1,102 +1,128 @@
-# 🌆 Urban Segmentation Project | 城市分割项目    
-[![LICENSE](https://img.shields.io/badge/license-MIT-green)](https://github.com/anxiangsir/urban_seg/blob/main/LICENSE)
+<div align="center">
 
+# 🛰️ Urban Segmentation
 
-## 🚀 项目概述 | Project Overview
-### 中文
-这是一个面向新手的遥感图像语义分割项目。我们使用了在**4亿张图像**上预训练的 [unicom模型](https://github.com/deepglint/unicom)，该模型在遥感分割任务中表现出色。令人惊讶的是，仅使用**4张遥感图像**进行训练即可获得优异效果。
+### Few-Shot Remote Sensing Semantic Segmentation powered by Foundation Models
 
-### English
-This is a beginner-friendly semantic segmentation project for remote sensing images. We employ the [unicom model](https://github.com/deepglint/unicom) pre-trained on 400 million images, which demonstrates outstanding performance on remote sensing segmentation tasks. Remarkably, it achieves excellent results with just **4 training images**.
+<p align="center">
+  <a href="https://github.com/anxiangsir/urban_seg/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" alt="License"></a>
+  <a href="https://github.com/deepglint/unicom"><img src="https://img.shields.io/badge/Backbone-UNICOM-blue?style=flat-square" alt="UNICOM"></a>
+  <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-%3E%3D1.10-red?style=flat-square" alt="PyTorch"></a>
+  <img src="https://img.shields.io/badge/Data_Efficiency-High-brightgreen?style=flat-square" alt="Data Efficiency">
+  <img src="https://visitor-badge.laobi.icu/badge?page_id=anxiangsir.urban_seg" alt="visitors">
+</p>
 
----
+[English](#-introduction) | [简体中文](#-项目介绍)
 
-## 🌟 效果展示 | Results Showcase
-<table>
-  <tr>
-    <td colspan="2" align="center">
-      <b>预测效果 | Predictions</b>
-    </td>
-  </tr>
-  <tr>
-    <td><img src="figures/predict.gif" width="400"></td>
-    <td><img src="figures/predict_02.gif" width="400"></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center">
-      <b>测试样例 | Test Samples</b>
-    </td>
-  </tr>
-  <tr>
-    <td><img src="figures/test.jpg" width="400"></td>
-    <td><img src="figures/test_02.jpg" width="400"></td>
-  </tr>
-</table>
+</div>
 
 ---
 
-## 🛠️ 快速开始 | Quick Start
-### 单GPU训练 | 1-GPU Training
+## 📖 Introduction
+
+**Urban Segmentation** is a streamlined, high-performance framework designed for semantic segmentation of remote sensing imagery. 
+
+Leveraging the power of **[UNICOM](https://github.com/deepglint/unicom)**—a vision foundation model pre-trained on **400 million** images—this project demonstrates extreme data efficiency. We achieve SOTA-level segmentation results using **only 4 labeled satellite images** for training. This repository serves as both a robust baseline for research and an accessible entry point for practitioners.
+
+## 📖 项目介绍
+
+**Urban Segmentation** 是一个专为遥感图像语义分割设计的高效框架。
+
+本项目利用了在 **4亿** 海量数据上预训练的视觉基础模型 **[UNICOM](https://github.com/deepglint/unicom)**，展示了极致的数据样本效率。我们仅需 **4张** 标注的卫星图像进行微调，即可获得极佳的分割效果。这不仅为科研提供了一个强有力的 Baseline，也为初学者提供了一个极简的实战范例。
+
+---
+
+## ⚡ Key Features
+
+*   **Foundation Model Power**: Built upon UNICOM ViT backbones, inheriting robust feature representations.
+*   **Extreme Few-Shot**: Achieve high mIoU with minimal annotated data (4 images).
+*   **Plug-and-Play**: Minimalist code structure (~200 lines for training) without complex dependencies.
+*   **Scalable**: Supports both single-GPU rapid prototyping and multi-GPU distributed training.
+
+---
+
+## 🎨 Visualization | 效果展示
+
+<div align="center">
+
+| **Dynamic Prediction** | **Generalization Test** |
+| :---: | :---: |
+| <img src="figures/predict.gif" width="350"> | <img src="figures/test.jpg" width="350"> |
+| <img src="figures/predict_02.gif" width="350"> | <img src="figures/test_02.jpg" width="350"> |
+
+</div>
+
+
+
+## 🛠️ Getting Started | 快速上手
+
+### 1. Installation
 ```bash
-python train_one_gpu.py  # 200行极简实现 | Minimal 200-line implementation
-```
-
-### 多GPU训练 | Multi-GPU Training
-```shell
-torchrun --nproc_per_node 8 train_multi_gpus.py  # 高性能多卡支持 | High-performance multi-GPU
-```
-
-## 📦 安装指南 | Installation
-```shell
 git clone https://github.com/anxiangsir/urban_seg.git
 cd urban_seg
 pip install -r requirements.txt
 ```
 
-## 📁 数据准备 | Data Preparation
+### 2. Data Preparation
 
-### 数据集结构 | Dataset Structure
-```shell
-dataset
-├── origin       # 5张带标注的原始图像 | 5 annotated originals
-├── test         # 3张无标注测试图像（本项目未使用）| 3 unlabeled test images (unused)
-└── train        # 通过预处理生成的训练数据 | Generated by preprocess.py
-    ├── images   # 训练图像 | Training images
-    └── labels   # 对应标签 | Corresponding labels
+Download the dataset (CCF Satellite Imagery) from [Baidu Cloud](https://pan.baidu.com/s/1LWBMklOr39yI7fYRQ185Og) (Code: `3ih2`).
+
+Structure your directory as follows:
+```text
+dataset/
+├── origin/       # 5 annotated source images
+├── test/         # Unlabeled test images
+└── train/        # Generated via preprocessing
+    ├── images/
+    └── labels/
 ```
 
-### 数据预处理 | Preprocessing
-
-```shell
-python preprocess.py  # 随机采样生成训练集 | Generate training set via random sampling
-```
-### 预训练模型 | Pretrained Models
-
-请从这里下载：  
-https://github.com/deepglint/unicom/releases
-
-```
-FP16-ViT-B-32.pt
-FP16-ViT-B-16.pt
-FP16-ViT-L-14.pt
-FP16-ViT-L-14-336px.pt
+Run the preprocessing script to generate random crops:
+```bash
+python preprocess.py
 ```
 
-### 数据集下载 | Dataset Download
+### 3. Model Zoo
 
-CCF卫星影像的AI分类与识别提供的数据集初赛复赛训练集，一共五张卫星遥感影像
-[百度云盘](https://pan.baidu.com/s/1LWBMklOr39yI7fYRQ185Og)，密码：3ih2
+Download the pre-trained UNICOM weights from the [Official Release](https://github.com/deepglint/unicom/releases):
 
-## 📜 引用我们 | Citation
-```shell
-@inproceedings{anxiang_2023_unicom,
+*   `FP16-ViT-B-32.pt`
+*   `FP16-ViT-B-16.pt` (Recommended)
+*   `FP16-ViT-L-14.pt`
+
+### 4. Training
+
+**Option A: Rapid Prototyping (Single GPU)**
+```bash
+# Minimal implementation (~200 lines)
+python train_one_gpu.py
+```
+
+**Option B: High-Performance Training (Multi-GPU DDP)**
+```bash
+# Distributed Data Parallel
+torchrun --nproc_per_node 8 train_multi_gpus.py
+```
+
+---
+
+## 📜 Citation
+
+If you find this project or the UNICOM model useful for your research, please consider citing:
+
+```bibtex
+@inproceedings{an2023unicom,
   title={Unicom: Universal and Compact Representation Learning for Image Retrieval},
   author={An, Xiang and Deng, Jiankang and Yang, Kaicheng and Li, Jiawei and Feng, Ziyong and Guo, Jia and Yang, Jing and Liu, Tongliang},
   booktitle={ICLR},
   year={2023}
 }
 ```
-## 💬 交流社区 | Community
 
-QQ群: 679897018 | QQ Group: 679897018
-欢迎提交Issue或加群讨论！ | Welcome to submit issues or join our group!
+## 🤝 Community & Support
+
+<div align="left">
+  <a href="https://qm.qq.com/cgi-bin/qm/qr?k=xxxxx"><img src="https://img.shields.io/badge/QQ_Group-679897018-blue?style=flat-square&logo=tencent-qq" alt="QQ Group"></a>
+</div>
+
+We welcome all contributions! Please feel free to open an issue or submit a pull request.
